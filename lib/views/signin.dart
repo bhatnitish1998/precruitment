@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:precruitment/widgets/widget.dart';
 
 class SignIn extends StatefulWidget {
+  final Function toggle;
+  SignIn(this.toggle);
+
   @override
   _SignInState createState() => _SignInState();
 }
@@ -42,6 +45,10 @@ class _SignInState extends State<SignIn> {
                 ),
                 SizedBox(height: 8),
                 RaisedButton(
+                  child: Text(
+                    "Login",
+                    style: TextStyle(color: Colors.black),
+                  ),
                   onPressed: null,
                 ),
                 SizedBox(height: 8),
@@ -49,9 +56,18 @@ class _SignInState extends State<SignIn> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Dont have an account? "),
-                    Text(
-                      "Create An Account.",
-                      style: TextStyle(decoration: TextDecoration.underline),
+                    GestureDetector(
+                      onTap: () {
+                        widget.toggle();
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 8),
+                        child: Text(
+                          "Create An Account.",
+                          style:
+                              TextStyle(decoration: TextDecoration.underline),
+                        ),
+                      ),
                     ),
                   ],
                 ),

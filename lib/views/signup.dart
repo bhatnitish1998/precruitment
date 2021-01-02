@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:precruitment/services/auth.dart';
+import 'package:precruitment/services/database.dart';
+import 'package:precruitment/views/chatRoomsScreen.dart';
 import 'package:precruitment/widgets/widget.dart';
 
 class SignUp extends StatefulWidget {
+  final Function toggle;
+  SignUp(this.toggle);
+
   @override
   _SignUpState createState() => _SignUpState();
 }
@@ -10,6 +15,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   bool isLoading = false;
   AuthMethods authMethods = new AuthMethods();
+  DatabaseMethods databaseMethods = new DatabaseMethods();
 
   final formkey = GlobalKey<FormState>();
   TextEditingController userNameTextEditingController =
@@ -21,6 +27,11 @@ class _SignUpState extends State<SignUp> {
 
   signMeUp() {
     if (formkey.currentState.validate()) {
+      Map<String, String> userMapInfo = {
+        "name": userNameTextEditingController.text,
+        "email": emailTextEditingController.text
+      };
+
       setState(() {
         isLoading = true;
       });
@@ -28,7 +39,15 @@ class _SignUpState extends State<SignUp> {
       authMethods
           .signUpWithEmailAndPassword(emailTextEditingController.text,
               passwordTextEditingController.text)
-          .then((value) => print("$value"));
+          .then((value) {
+        databaseMethods.uploadUserInfo(userMapInfo);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChatRoom(),
+          ),
+        );
+      });
     }
   }
 
@@ -120,10 +139,18 @@ class _SignUpState extends State<SignUp> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("Already have an account? "),
-                          Text(
-                            "Login.",
-                            style:
-                                TextStyle(decoration: TextDecoration.underline),
+                          GestureDetector(
+                            onTap: () {
+                              widget.toggle();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 8),
+                              child: Text(
+                                "Login.",
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline),
+                              ),
+                            ),
                           ),
                         ],
                       ),
