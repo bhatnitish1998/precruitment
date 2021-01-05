@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:precruitment/helper/helperfunctions.dart';
 import 'package:precruitment/services/auth.dart';
 import 'package:precruitment/services/database.dart';
 import 'package:precruitment/views/chatRoomsScreen.dart';
@@ -32,6 +33,11 @@ class _SignUpState extends State<SignUp> {
         "email": emailTextEditingController.text
       };
 
+      HelperFunctions.saveUserNameSharedPreference(
+          userNameTextEditingController.text);
+      HelperFunctions.saveUserEmailSharedPreference(
+          emailTextEditingController.text);
+
       setState(() {
         isLoading = true;
       });
@@ -41,6 +47,7 @@ class _SignUpState extends State<SignUp> {
               passwordTextEditingController.text)
           .then((value) {
         databaseMethods.uploadUserInfo(userMapInfo);
+        HelperFunctions.saveUserLoggedInSharedPreference(true);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
