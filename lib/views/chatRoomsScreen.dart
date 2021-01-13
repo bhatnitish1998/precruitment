@@ -62,39 +62,42 @@ class _ChatRoomState extends State<ChatRoom> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Precruitment"),
-        actions: [
-          GestureDetector(
-            onTap: () {
-              authMethods.signOut();
-              HelperFunctions.saveUserLoggedInSharedPreference(false);
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Authenticate(),
-                ),
-              );
-            },
-            child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Icon(Icons.exit_to_app)),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.search),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SearchScreen(),
-            ),
-          );
-        },
-      ),
-    );
+    return chatRoomsList();
+// TODO
+    // return Scaffold(
+    // appBar: AppBar(
+    // title: Text("Precruitment"),
+    // actions: [
+    // GestureDetector(
+    // onTap: () {
+    // authMethods.signOut();
+    // HelperFunctions.saveUserLoggedInSharedPreference(false);
+    // Navigator.pushReplacement(
+    // context,
+    // MaterialPageRoute(
+    //       builder: (context) => Authenticate(),
+    //     ),
+    //   );
+    // },
+    // child: Container(
+    // padding: EdgeInsets.symmetric(horizontal: 16),
+    // child: Icon(Icons.exit_to_app)),
+    // ),
+    // ],
+    // ),
+    // body: chatRoomsList(),
+    //   floatingActionButton: FloatingActionButton(
+    //     child: Icon(Icons.search),
+    //     onPressed: () {
+    //       Navigator.push(
+    //         context,
+    //         MaterialPageRoute(
+    //           builder: (context) => SearchScreen(),
+    //         ),
+    //       );
+    //     },
+    //   ),
+    // );
   }
 }
 
@@ -121,8 +124,8 @@ class ChatRoomsTile extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              height: 40,
-              width: 40,
+              height: 45,
+              width: 45,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: Colors.blue,
@@ -145,7 +148,6 @@ class ChatRoomsTile extends StatelessWidget {
               userName,
               textAlign: TextAlign.start,
               style: TextStyle(
-                  color: Colors.white,
                   fontSize: 16,
                   fontFamily: 'OverpassRegular',
                   fontWeight: FontWeight.w300),

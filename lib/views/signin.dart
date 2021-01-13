@@ -4,6 +4,7 @@ import 'package:precruitment/helper/helperfunctions.dart';
 import 'package:precruitment/services/auth.dart';
 import 'package:precruitment/services/database.dart';
 import 'package:precruitment/views/chatRoomsScreen.dart';
+import 'package:precruitment/views/home.dart';
 import 'package:precruitment/widgets/widget.dart';
 
 class SignIn extends StatefulWidget {
@@ -52,7 +53,8 @@ class _SignInState extends State<SignIn> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => ChatRoom(),
+              // builder: (context) => ChatRoom(),
+              builder: (context) => Home(),
             ),
           );
         }
