@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:precruitment/helper/authenticate.dart';
 import 'package:precruitment/helper/constants.dart';
 import 'package:precruitment/helper/helperfunctions.dart';
 import 'package:precruitment/services/auth.dart';
 import 'package:precruitment/services/database.dart';
 import 'package:precruitment/views/conversation_screen.dart';
-import 'package:precruitment/views/search.dart';
 // import 'package:precruitment/views/signin.dart';
 
 class ChatRoom extends StatefulWidget {
@@ -109,7 +107,7 @@ class ChatRoomsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         Navigator.push(
           context,

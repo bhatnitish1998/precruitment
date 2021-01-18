@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:precruitment/helper/authenticate.dart';
+import 'package:precruitment/helper/helperfunctions.dart';
+import 'package:precruitment/services/auth.dart';
 import 'package:precruitment/views/chatRoomsScreen.dart';
-import 'package:precruitment/widgets/widget.dart';
+import 'package:precruitment/views/offers.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -11,20 +14,38 @@ class _HomeState extends State<Home> {
   int _currentIndex = 0;
 
   List<Widget> _widgetOptions = <Widget>[
-    Text('offer'),
+    Offers(),
     ChatRoom(),
-    Text('profile')
+    Text('profile'),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarMain(context),
+      appBar: AppBar(
+        title: Text("Precruitment"),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              AuthMethods().signOut();
+              HelperFunctions.saveUserLoggedInSharedPreference(false);
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Authenticate(),
+                ),
+              );
+            },
+            child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Icon(Icons.exit_to_app)),
+          ),
+        ],
+      ),
       body: _widgetOptions.elementAt(_currentIndex),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (value) {
-          print(value);
           setState(() {
             _currentIndex = value;
           });

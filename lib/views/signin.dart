@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:precruitment/helper/helperfunctions.dart';
 import 'package:precruitment/services/auth.dart';
 import 'package:precruitment/services/database.dart';
-import 'package:precruitment/views/chatRoomsScreen.dart';
 import 'package:precruitment/views/home.dart';
+import 'package:precruitment/widgets/dialogs.dart';
 import 'package:precruitment/widgets/widget.dart';
 
 class SignIn extends StatefulWidget {
@@ -21,6 +21,8 @@ class _SignInState extends State<SignIn> {
   DatabaseMethods databaseMethods = new DatabaseMethods();
 
   final formkey = GlobalKey<FormState>();
+  final loadkey = GlobalKey<State>();
+
   TextEditingController emailTextEditingController =
       new TextEditingController();
   TextEditingController passwordTextEditingController =
@@ -29,6 +31,8 @@ class _SignInState extends State<SignIn> {
 
   signIn() {
     if (formkey.currentState.validate()) {
+      Dialogs.showLoadingDialog(context, loadkey); //here
+
       HelperFunctions.saveUserEmailSharedPreference(
           emailTextEditingController.text);
 
@@ -49,6 +53,8 @@ class _SignInState extends State<SignIn> {
               passwordTextEditingController.text)
           .then((value) {
         if (value != null) {
+          Navigator.of(loadkey.currentContext, rootNavigator: true)
+              .pop(); //here
           HelperFunctions.saveUserLoggedInSharedPreference(true);
           Navigator.pushReplacement(
             context,

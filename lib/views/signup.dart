@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:precruitment/helper/helperfunctions.dart';
 import 'package:precruitment/services/auth.dart';
 import 'package:precruitment/services/database.dart';
-import 'package:precruitment/views/chatRoomsScreen.dart';
+import 'package:precruitment/views/home.dart';
 import 'package:precruitment/widgets/widget.dart';
 
 class SignUp extends StatefulWidget {
@@ -19,6 +19,8 @@ class _SignUpState extends State<SignUp> {
   DatabaseMethods databaseMethods = new DatabaseMethods();
 
   final formkey = GlobalKey<FormState>();
+  final loadkey = GlobalKey<State>();
+
   TextEditingController userNameTextEditingController =
       new TextEditingController();
   TextEditingController emailTextEditingController =
@@ -51,7 +53,7 @@ class _SignUpState extends State<SignUp> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => ChatRoom(),
+            builder: (context) => Home(),
           ),
         );
       });
