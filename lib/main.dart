@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:precruitment/helper/authenticate.dart';
 import 'package:precruitment/helper/helperfunctions.dart';
-import 'package:precruitment/views/chatRoomsScreen.dart';
+// import 'package:precruitment/views/chatRoomsScreen.dart';
+import 'package:precruitment/views/home.dart';
 // import 'package:precruitment/views/signup.dart';
 
 void main() async {
@@ -45,7 +46,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: userIsLoggedIn ? ChatRoom() : Authenticate(),
+      home: userIsLoggedIn ? Home() : Authenticate(),
     );
   }
 }
