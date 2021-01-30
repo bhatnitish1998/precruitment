@@ -1,12 +1,31 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:precruitment/helper/constants.dart';
+import 'package:precruitment/helper/helperfunctions.dart';
+import 'package:precruitment/services/database.dart';
+import 'package:precruitment/views/applyScreen.dart';
 
 class OfferTile extends StatelessWidget {
   final String companyName;
   final String role;
   final String deadline;
-  final String cgpa;
+  final double cgpa;
+  final String testDate;
+  final double tenth;
+  final double twelfth;
+  final String description;
+  final String salary;
 
-  OfferTile({this.companyName, this.role, this.deadline, this.cgpa});
+  OfferTile(
+      {this.companyName,
+      this.role,
+      this.deadline,
+      this.cgpa,
+      this.testDate,
+      this.tenth,
+      this.twelfth,
+      this.description,
+      this.salary});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +36,22 @@ class OfferTile extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              print("Clicked offer");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ApplyScreen(
+                    cgpa: cgpa,
+                    company: companyName,
+                    deadline: deadline,
+                    description: description,
+                    role: role,
+                    salary: salary,
+                    tenth: tenth,
+                    twelfth: twelfth,
+                    testDate: testDate,
+                  ),
+                ),
+              );
             },
             child: Container(
               margin: EdgeInsets.fromLTRB(76.0, 16.0, 16.0, 10.0),
@@ -58,7 +92,7 @@ class OfferTile extends StatelessWidget {
                         ),
                         new Container(width: 8.0),
                         // CGPA
-                        new Text(this.cgpa),
+                        new Text(this.cgpa.toString()),
                       ],
                     ),
                   ],
@@ -97,17 +131,68 @@ class Offers extends StatefulWidget {
 }
 
 class _OffersState extends State<Offers> {
+  Stream offersStream;
+  DatabaseMethods databaseMethods = new DatabaseMethods();
+
   Widget offersList() {
-    return ListView(
-      children: [
-        OfferTile(
-          cgpa: "10",
-          companyName: "hubli",
-          deadline: "123",
-          role: "bb",
-        ),
-      ],
+    return StreamBuilder(
+      stream: offersStream,
+      builder: (context, snapshot) {
+        return snapshot.hasData
+            ? ListView.builder(
+                itemCount: snapshot.data.documents.length,
+                itemBuilder: (context, index) {
+                  return OfferTile(
+                    cgpa: snapshot.data.documents[index].data()['minCGPA'],
+                    companyName:
+                        snapshot.data.documents[index].data()['company'],
+                    deadline: snapshot.data.documents[index].data()['deadline'],
+                    role: snapshot.data.documents[index].data()['role'],
+                    description:
+                        snapshot.data.documents[index].data()['description'],
+                    salary: snapshot.data.documents[index]
+                        .data()['salary']
+                        .toString()
+                        .toString(),
+                    tenth: snapshot.data.documents[index].data()['minTenth'],
+                    twelfth:
+                        snapshot.data.documents[index].data()['minTwelfth'],
+                    testDate: snapshot.data.documents[index].data()['testDate'],
+                  );
+                })
+            : Container();
+      },
     );
+    // return ListView(
+    //   children: [
+    //     OfferTile(
+    //       cgpa: "10",
+    //       companyName: "hubli",
+    //       deadline: "123",
+    //       role: "bb",
+    //     ),
+    //   ],
+    // );
+  }
+
+  @override
+  void initState() {
+    getOffers();
+    super.initState();
+  }
+
+  getOffers() async {
+    Constants.myName = await HelperFunctions.getUserNameSharedPreference();
+    // int branch = databaseMethods.getUserByUsername(Constants.myName)['branch'];
+    QuerySnapshot bsnap =
+        await databaseMethods.getUserByUsername(Constants.myName);
+    // print(bsnap.docs[0].data()['branch']);
+    databaseMethods.getOffers(bsnap.docs[0].data()['branch']).then((value) {
+      setState(() {
+        offersStream = value;
+      });
+    });
+    setState(() {});
   }
 
   @override

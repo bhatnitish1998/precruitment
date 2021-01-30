@@ -57,4 +57,20 @@ class DatabaseMethods {
         .where('users', arrayContains: userName)
         .snapshots();
   }
+
+  uploadOffer(offerMap) {
+    FirebaseFirestore.instance
+        .collection("offers")
+        .add(offerMap)
+        .catchError((e) {
+      print(e.toString());
+    });
+  }
+
+  getOffers(int branch) async {
+    return await FirebaseFirestore.instance
+        .collection("offers")
+        .where('branches', arrayContains: branch)
+        .snapshots();
+  }
 }

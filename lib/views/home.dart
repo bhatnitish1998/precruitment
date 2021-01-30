@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:precruitment/helper/authenticate.dart';
 import 'package:precruitment/helper/helperfunctions.dart';
 import 'package:precruitment/services/auth.dart';
+import 'package:precruitment/views/addOffer.dart';
 import 'package:precruitment/views/chatRoomsScreen.dart';
 import 'package:precruitment/views/offers.dart';
 import 'package:precruitment/views/search.dart';
@@ -46,7 +47,8 @@ class _HomeState extends State<Home> {
         child: _fabOptions.elementAt(_currentIndex),
         onTap: () {
           if (_currentIndex == 0) {
-            print("I pressed add offer");
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => AddOffer()));
           } else if (_currentIndex == 1) {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => SearchScreen()));
