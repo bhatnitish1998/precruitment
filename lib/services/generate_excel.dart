@@ -3,22 +3,35 @@ import 'dart:io';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:downloads_path_provider/downloads_path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 Future<void> createExcel(String company, String role) async {
   List<dynamic> applied;
   int base = 3;
   int count = 0;
+  List heading = [
+    'Sl No.',
+    'USN',
+    'Name',
+    'Email',
+    'Mobile',
+    'DOB',
+    'Branch',
+    'BE CGPA',
+    '10th %',
+    '12th %',
+    'College'
+  ];
   List attr = [
-    "USN",
     "name",
-    "Fullname",
-    "Course",
-    "Branch",
-    "CGPA",
-    "moblie",
-    "email",
+    "fullname",
+    "personalMail",
+    "phone",
+    "DOB",
+    "branch",
+    "cgpa",
     "tenth",
-    "twelfth"
+    "twelfth",
   ];
 // get the applied students names.
   await FirebaseFirestore.instance
@@ -43,14 +56,13 @@ Future<void> createExcel(String company, String role) async {
   sheet.enableSheetCalculations();
   //Set data in the worksheet.
   sheet.getRangeByName('A1').columnWidth = 7;
-  sheet.getRangeByName('B1:D1').columnWidth = 13.82;
-  sheet.getRangeByName('E1:G1').columnWidth = 9;
-  sheet.getRangeByName('H1').columnWidth = 14.82;
-  sheet.getRangeByName('I1').columnWidth = 21.82;
-  sheet.getRangeByName('J1:K1').columnWidth = 9;
+  sheet.getRangeByName('B1').columnWidth = 15;
+  sheet.getRangeByName('C1:D1').columnWidth = 20;
+  sheet.getRangeByName('E1:G1').columnWidth = 15;
+  sheet.getRangeByName('H1:J1').columnWidth = 10;
+  sheet.getRangeByName('K1').columnWidth = 25;
 
   sheet.getRangeByName('A1:K2').merge();
-
   sheet.getRangeByName('A1').setText('$company : $role');
   sheet.getRangeByName('A1').cellStyle.fontSize = 24;
 
@@ -58,9 +70,8 @@ Future<void> createExcel(String company, String role) async {
   range6.cellStyle.fontSize = 10;
   range6.cellStyle.bold = true;
 
-  sheet.getRangeByIndex(base, 1).setText("Sl no.");
-  var temp1 = 2;
-  attr.forEach((idx) {
+  var temp1 = 1;
+  heading.forEach((idx) {
     sheet.getRangeByIndex(base, temp1).setText(idx);
     temp1 += 1;
   });
@@ -83,6 +94,9 @@ Future<void> createExcel(String company, String role) async {
                     .setText(doc.data()[attr[i]].toString());
                 temp += 1;
               }
+              sheet
+                  .getRangeByIndex(base, (attr.length + 1))
+                  .setText("KLE Technological University");
               base += 1;
             })
           });
@@ -92,6 +106,7 @@ Future<void> createExcel(String company, String role) async {
   //Dispose the document.
   workbook.dispose();
   //Save file.
+  await Permission.storage.request().isGranted;
   final directory = await DownloadsPathProvider.downloadsDirectory;
   final path = directory.path;
   final file = File('$path/$company-$role.xlsx');
