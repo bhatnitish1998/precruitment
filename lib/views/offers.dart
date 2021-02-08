@@ -6,18 +6,20 @@ import 'package:precruitment/services/database.dart';
 import 'package:precruitment/views/applyScreen.dart';
 
 class OfferTile extends StatelessWidget {
+  final String id;
   final String companyName;
   final String role;
-  final String deadline;
+  final Timestamp deadline;
   final double cgpa;
-  final String testDate;
+  final Timestamp testDate;
   final double tenth;
   final double twelfth;
   final String description;
   final String salary;
 
   OfferTile(
-      {this.companyName,
+      {this.id,
+      this.companyName,
       this.role,
       this.deadline,
       this.cgpa,
@@ -40,15 +42,16 @@ class OfferTile extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ApplyScreen(
+                    id: id,
                     cgpa: cgpa,
                     company: companyName,
-                    deadline: deadline,
+                    deadline: deadline.toDate(),
                     description: description,
                     role: role,
                     salary: salary,
                     tenth: tenth,
                     twelfth: twelfth,
-                    testDate: testDate,
+                    testDate: testDate.toDate(),
                   ),
                 ),
               );
@@ -84,7 +87,8 @@ class OfferTile extends StatelessWidget {
                         ),
                         new Container(width: 8.0),
                         // Deadline
-                        new Text(this.deadline),
+                        new Text(
+                            "${this.deadline.toDate().day} / ${this.deadline.toDate().month}"),
                         new Container(width: 24.0),
                         Icon(
                           Icons.score,
@@ -143,6 +147,7 @@ class _OffersState extends State<Offers> {
                 itemCount: snapshot.data.documents.length,
                 itemBuilder: (context, index) {
                   return OfferTile(
+                    id: snapshot.data.documents[index].id,
                     cgpa: snapshot.data.documents[index].data()['minCGPA'],
                     companyName:
                         snapshot.data.documents[index].data()['company'],

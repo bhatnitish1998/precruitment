@@ -73,4 +73,10 @@ class DatabaseMethods {
         .where('branches', arrayContains: branch)
         .snapshots();
   }
+
+  addUserToOffer(String offerId, String userName) {
+    FirebaseFirestore.instance.collection("offers").doc(offerId).update({
+      "applied": FieldValue.arrayUnion([userName])
+    });
+  }
 }
