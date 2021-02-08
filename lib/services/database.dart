@@ -58,6 +58,15 @@ class DatabaseMethods {
         .snapshots();
   }
 
+  Future<void> updateUser(String userId, userMap) {
+    return FirebaseFirestore.instance
+        .collection("users")
+        .doc(userId)
+        .update(userMap)
+        .then((value) => print("User Updated"))
+        .catchError((error) => print("Failed to update user: $error"));
+  }
+
   uploadOffer(offerMap) {
     FirebaseFirestore.instance
         .collection("offers")

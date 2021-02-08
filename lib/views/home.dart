@@ -5,6 +5,7 @@ import 'package:precruitment/services/auth.dart';
 import 'package:precruitment/views/addOffer.dart';
 import 'package:precruitment/views/chatRoomsScreen.dart';
 import 'package:precruitment/views/offers.dart';
+import 'package:precruitment/views/profile.dart';
 import 'package:precruitment/views/search.dart';
 import 'package:precruitment/views/alumini_screen.dart';
 
@@ -19,7 +20,7 @@ class _HomeState extends State<Home> {
   List<Widget> _widgetOptions = <Widget>[
     Offers(),
     ChatRoom(),
-    Text('profile'),
+    Profile(),
     AluminiScreen(),
   ];
 

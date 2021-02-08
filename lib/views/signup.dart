@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:precruitment/helper/helperfunctions.dart';
 import 'package:precruitment/services/auth.dart';
 import 'package:precruitment/services/database.dart';
-import 'package:precruitment/views/home.dart';
+import 'package:precruitment/views/profile.dart';
+import 'package:precruitment/views/verify.dart';
+// import 'package:precruitment/views/home.dart';
+// import 'package:precruitment/views/profile.dart';
 import 'package:precruitment/widgets/widget.dart';
 
 class SignUp extends StatefulWidget {
@@ -53,7 +56,7 @@ class _SignUpState extends State<SignUp> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Home(),
+            builder: (context) => Verify(),
           ),
         );
       });
@@ -97,14 +100,14 @@ class _SignUpState extends State<SignUp> {
                             TextFormField(
                               validator: (val) {
                                 return RegExp(
-                                            r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
+                                            r"^01(fe|FE)\d\d(b|B)[a-zA-Z][a-zA-Z]\d\d\d@(kletech.ac.in|KLETECH.AC.IN)$")
                                         .hasMatch(val)
                                     ? null
-                                    : "Bad Email";
+                                    : "Please enter a valid KLE Tech Email ID";
                               },
                               controller: emailTextEditingController,
                               decoration: InputDecoration(
-                                hintText: "email",
+                                hintText: "Email",
                               ),
                             ),
                             TextFormField(
@@ -116,7 +119,7 @@ class _SignUpState extends State<SignUp> {
                               },
                               controller: passwordTextEditingController,
                               decoration: InputDecoration(
-                                hintText: "password",
+                                hintText: "Password",
                               ),
                             ),
                           ],
@@ -139,7 +142,10 @@ class _SignUpState extends State<SignUp> {
                           signMeUp();
                         },
                         child: RaisedButton(
-                          child: Text("Signup"),
+                          child: Text(
+                            "Signup",
+                            style: TextStyle(color: Colors.black),
+                          ),
                           onPressed: null,
                         ),
                       ),
