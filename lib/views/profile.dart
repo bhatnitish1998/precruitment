@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:precruitment/helper/constants.dart';
 import 'package:precruitment/helper/helperfunctions.dart';
 import 'package:precruitment/models/user.dart';
 import 'package:precruitment/views/home.dart';
@@ -22,10 +23,7 @@ class _ProfileState extends State<Profile> {
   double cgpa;
   double twelfth;
   double tenth;
-// enum branch;
-// enum gender;
-  bool placedStatus;
-  String course;
+  int branch = 0;
 
   // Map<String, String> userMapInfo = {
   //       "name": userNameTextEditingController.text,
@@ -488,7 +486,7 @@ class _ProfileState extends State<Profile> {
       'twelfth': double.parse(_userTwelfthController.text),
       'tenth': double.parse(_userTenthController.text),
       'DOB': _userDOBController.text,
-      'branch': 0
+      'branch': branch
     };
 
     // databaseMethods.uploadUserInfo(userMapInfo);
@@ -531,8 +529,24 @@ class _ProfileState extends State<Profile> {
     );
   }
 
+  applyBranch() {
+    Map<String, int> branchMap = {
+      "AR": 0,
+      "BT": 1,
+      "CV": 2,
+      "CS": 3,
+      "EE": 4,
+      "EC": 5,
+      "ME": 6,
+    };
+    setState(() {
+      branch = branchMap[Constants.myName.substring(7, 9)];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    applyBranch();
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
