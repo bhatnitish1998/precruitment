@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:precruitment/helper/constants.dart';
 import 'package:precruitment/services/database.dart';
+import 'package:precruitment/services/generate_excel.dart';
 
 class ApplyScreen extends StatefulWidget {
   final String id;
@@ -254,7 +255,16 @@ class _ApplyScreenState extends State<ApplyScreen> {
       // color: Theme.of(context).primaryColor,
       padding: EdgeInsets.all(40.0),
       child: Column(
-        children: <Widget>[bottomContentText, readButton],
+        children: <Widget>[
+          bottomContentText,
+          readButton,
+          RaisedButton(
+            onPressed: () {
+              createExcel("Generic Co.", widget.role);
+            },
+            child: Text("Generate Excel Sheet"),
+          )
+        ],
       ),
     );
 
