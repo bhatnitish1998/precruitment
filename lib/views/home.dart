@@ -103,13 +103,23 @@ class _HomeState extends State<Home> {
       // ),
       bottomNavigationBar: BottomAppBar(
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(16.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               GestureDetector(
-                child: Icon(Icons.face),
+                child: Container(
+                  height: 40.0,
+                  child: Column(
+                    children: [
+                      Icon(Icons.article_outlined),
+                      Text(
+                        "Offers",
+                      ),
+                    ],
+                  ),
+                ),
                 onTap: () {
                   setState(() {
                     _currentIndex = 0;
@@ -117,7 +127,17 @@ class _HomeState extends State<Home> {
                 },
               ),
               GestureDetector(
-                child: Icon(Icons.ac_unit),
+                child: Container(
+                  height: 40.0,
+                  child: Column(
+                    children: [
+                      Icon(Icons.forum_outlined),
+                      Text(
+                        "Chat",
+                      )
+                    ],
+                  ),
+                ),
                 onTap: () {
                   setState(() {
                     _currentIndex = 1;
@@ -125,7 +145,17 @@ class _HomeState extends State<Home> {
                 },
               ),
               GestureDetector(
-                child: Icon(Icons.g_translate),
+                child: Container(
+                  height: 40.0,
+                  child: Column(
+                    children: [
+                      Icon(Icons.person_outline),
+                      Text(
+                        "Profile",
+                      )
+                    ],
+                  ),
+                ),
                 onTap: () {
                   setState(() {
                     _currentIndex = 2;
@@ -133,7 +163,15 @@ class _HomeState extends State<Home> {
                 },
               ),
               GestureDetector(
-                child: Icon(Icons.pages),
+                child: Container(
+                  height: 40.0,
+                  child: Column(
+                    children: [
+                      Icon(Icons.emoji_events_outlined),
+                      Text("Inspiration")
+                    ],
+                  ),
+                ),
                 onTap: () {
                   setState(() {
                     _currentIndex = 3;
