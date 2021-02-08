@@ -1,5 +1,6 @@
 import 'dart:io';
 // import 'package:flutter/material.dart';
+import 'package:precruitment/helper/constants.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:downloads_path_provider/downloads_path_provider.dart';
@@ -58,7 +59,8 @@ Future<void> createExcel(String company, String role) async {
   sheet.getRangeByName('A1').columnWidth = 7;
   sheet.getRangeByName('B1').columnWidth = 15;
   sheet.getRangeByName('C1:D1').columnWidth = 20;
-  sheet.getRangeByName('E1:G1').columnWidth = 15;
+  sheet.getRangeByName('E1:F1').columnWidth = 15;
+  sheet.getRangeByName('G1').columnWidth = 25;
   sheet.getRangeByName('H1:J1').columnWidth = 10;
   sheet.getRangeByName('K1').columnWidth = 25;
 
@@ -89,10 +91,17 @@ Future<void> createExcel(String company, String role) async {
               var temp = 2;
               sheet.getRangeByIndex(base, 1).setText((count).toString());
               for (var i = 0; i < attr.length; i++) {
-                sheet
-                    .getRangeByIndex(base, temp)
-                    .setText(doc.data()[attr[i]].toString());
-                temp += 1;
+                if (i == 5) {
+                  sheet.getRangeByIndex(base, temp).setText(
+                      Constants.branches[doc.data()[attr[i]]].toString());
+                  print(Constants.branches[doc.data()[attr[i]]].toString());
+                  temp += 1;
+                } else {
+                  sheet
+                      .getRangeByIndex(base, temp)
+                      .setText(doc.data()[attr[i]].toString());
+                  temp += 1;
+                }
               }
               sheet
                   .getRangeByIndex(base, (attr.length + 2))
