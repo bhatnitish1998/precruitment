@@ -61,7 +61,6 @@ class _ChatRoomState extends State<ChatRoom> {
   @override
   Widget build(BuildContext context) {
     return chatRoomsList();
-// TODO
     // return Scaffold(
     // appBar: AppBar(
     // title: Text("Precruitment"),
