@@ -13,6 +13,8 @@ class _AddOfferState extends State<AddOffer> {
 
   final formkey = GlobalKey<FormState>();
   String message = "";
+  TextEditingController companyTextEditingController =
+      new TextEditingController();
   TextEditingController roleTextEditingController = new TextEditingController();
   TextEditingController cgpaTextEditingController = new TextEditingController();
   TextEditingController tenthTextEditingController =
@@ -36,7 +38,7 @@ class _AddOfferState extends State<AddOffer> {
       }
       print(b);
       Map<String, dynamic> offerMap = {
-        "company": "Generic Co.", //TODO
+        "company": companyTextEditingController.text,
         "role": roleTextEditingController.text,
         "minCGPA": double.parse(cgpaTextEditingController.text),
         "minTenth": double.parse(tenthTextEditingController.text),
@@ -53,6 +55,7 @@ class _AddOfferState extends State<AddOffer> {
         message = "Offer Added Succesfully!";
       });
     }
+    companyTextEditingController.clear();
     roleTextEditingController.clear();
     cgpaTextEditingController.clear();
     tenthTextEditingController.clear();
@@ -108,6 +111,12 @@ class _AddOfferState extends State<AddOffer> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    TextFormField(
+                      controller: companyTextEditingController,
+                      decoration: InputDecoration(
+                        hintText: "Company Name",
+                      ),
+                    ),
                     TextFormField(
                       controller: roleTextEditingController,
                       decoration: InputDecoration(
