@@ -95,7 +95,7 @@ Future<void> createExcel(String company, String role) async {
                 temp += 1;
               }
               sheet
-                  .getRangeByIndex(base, (attr.length + 1))
+                  .getRangeByIndex(base, (attr.length + 2))
                   .setText("KLE Technological University");
               base += 1;
             })

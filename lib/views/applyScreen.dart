@@ -43,10 +43,8 @@ class _ApplyScreenState extends State<ApplyScreen> {
     if (DateTime.now().isAfter(widget.deadline) ||
         DateTime.now().isAfter(widget.testDate)) {
       _isButtonDisabled = true;
-      print("HO");
     } else {
       _isButtonDisabled = false;
-      print("H111O");
     }
     _inelligible = false;
     super.initState();
