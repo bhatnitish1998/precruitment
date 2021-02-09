@@ -247,6 +247,22 @@ class _ApplyScreenState extends State<ApplyScreen> {
       ),
     );
 
+    final excelButton = Padding(
+      padding: EdgeInsets.symmetric(vertical: 16.0),
+      child: Builder(
+        builder: (context) => RaisedButton(
+          onPressed: () async {
+            await createExcel("Generic Co.", widget.role);
+            final snackbar = SnackBar(content: Text("Excel Sheet Downloaded "));
+            Scaffold.of(context).showSnackBar(snackbar);
+          },
+          color: Colors.blue,
+          child: Text("Generate Excel Sheet",
+              style: TextStyle(color: Colors.white)),
+        ),
+      ),
+    );
+
     final bottomContent = Container(
       // height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
@@ -256,12 +272,13 @@ class _ApplyScreenState extends State<ApplyScreen> {
         children: <Widget>[
           bottomContentText,
           readButton,
-          RaisedButton(
-            onPressed: () {
-              createExcel("Generic Co.", widget.role);
-            },
-            child: Text("Generate Excel Sheet"),
-          )
+          excelButton,
+          // RaisedButton(
+          //   onPressed: () {
+          //     createExcel("Generic Co.", widget.role);
+          //   },
+          //   child: Text("Generate Excel Sheet"),
+          // )
         ],
       ),
     );
