@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:precruitment/helper/constants.dart';
 import 'package:precruitment/helper/helperfunctions.dart';
 import 'package:precruitment/services/auth.dart';
 import 'package:precruitment/services/database.dart';
@@ -40,6 +41,7 @@ class _SignUpState extends State<SignUp> {
 
       HelperFunctions.saveUserNameSharedPreference(
           userNameTextEditingController.text);
+      Constants.myName = userNameTextEditingController.text;
       HelperFunctions.saveUserEmailSharedPreference(
           emailTextEditingController.text);
 
