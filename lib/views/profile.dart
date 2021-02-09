@@ -550,13 +550,19 @@ class _ProfileState extends State<Profile> {
     QuerySnapshot userSnap =
         await databaseMethods.getUserByUsername(Constants.myName);
     _userAddressController.text = userSnap.docs[0].data()["address"];
-    _userCGPAController.text = userSnap.docs[0].data()["cgpa"].toString();
+    _userCGPAController.text = userSnap.docs[0].data()["cgpa"] == null
+        ? ""
+        : userSnap.docs[0].data()["cgpa"].toString();
     _userDOBController.text = userSnap.docs[0].data()["DOB"];
     _userEmailController.text = userSnap.docs[0].data()["personalMail"];
     _userNameController.text = userSnap.docs[0].data()["fullname"];
     _userPhoneController.text = userSnap.docs[0].data()["phone"];
-    _userTenthController.text = userSnap.docs[0].data()["tenth"].toString();
-    _userTwelfthController.text = userSnap.docs[0].data()["twelfth"].toString();
+    _userTenthController.text = userSnap.docs[0].data()["tenth"] == null
+        ? ""
+        : userSnap.docs[0].data()["tenth"];
+    _userTwelfthController.text = userSnap.docs[0].data()["twelfth"] == null
+        ? ""
+        : userSnap.docs[0].data()["twelfth"];
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:precruitment/helper/authenticate.dart';
+import 'package:precruitment/helper/constants.dart';
 import 'package:precruitment/helper/helperfunctions.dart';
 import 'package:precruitment/services/auth.dart';
 import 'package:precruitment/views/addOffer.dart';
@@ -64,6 +65,7 @@ class _HomeState extends State<Home> {
             onTap: () {
               AuthMethods().signOut();
               HelperFunctions.saveUserLoggedInSharedPreference(false);
+              Constants.myName = null;
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
