@@ -73,7 +73,7 @@ class _ProfileState extends State<Profile> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
               prefixIcon: Icon(
-                Icons.email,
+                Icons.person,
                 color: Colors.white,
               ),
               hintText: 'Enter your full name',
@@ -178,7 +178,7 @@ class _ProfileState extends State<Profile> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
               prefixIcon: Icon(
-                Icons.email,
+                Icons.mobile_friendly,
                 color: Colors.white,
               ),
               hintText: 'Enter your mobile number',
@@ -233,7 +233,7 @@ class _ProfileState extends State<Profile> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
               prefixIcon: Icon(
-                Icons.email,
+                Icons.home,
                 color: Colors.white,
               ),
               hintText:
@@ -284,7 +284,7 @@ class _ProfileState extends State<Profile> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
               prefixIcon: Icon(
-                Icons.email,
+                Icons.grade,
                 color: Colors.white,
               ),
               hintText: 'Enter Your CGPA',
@@ -337,7 +337,7 @@ class _ProfileState extends State<Profile> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
               prefixIcon: Icon(
-                Icons.email,
+                Icons.grade,
                 color: Colors.white,
               ),
               hintText: 'Enter Your SSLC%',
@@ -390,7 +390,7 @@ class _ProfileState extends State<Profile> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
               prefixIcon: Icon(
-                Icons.email,
+                Icons.grade,
                 color: Colors.white,
               ),
               hintText: 'Enter your PUC%',
@@ -443,7 +443,7 @@ class _ProfileState extends State<Profile> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
               prefixIcon: Icon(
-                Icons.email,
+                Icons.calendar_today,
                 color: Colors.white,
               ),
               hintText: 'DD-MM-YYYY',
