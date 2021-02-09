@@ -486,7 +486,7 @@ class _ProfileState extends State<Profile> {
       'twelfth': double.parse(_userTwelfthController.text),
       'tenth': double.parse(_userTenthController.text),
       'DOB': _userDOBController.text,
-      'branch': branch
+      'branch': applyBranch()
     };
 
     // databaseMethods.uploadUserInfo(userMapInfo);
@@ -529,7 +529,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  applyBranch() {
+  int applyBranch() {
     Map<String, int> branchMap = {
       "AR": 0,
       "BT": 1,
@@ -539,36 +539,39 @@ class _ProfileState extends State<Profile> {
       "EC": 5,
       "ME": 6,
     };
+    print(Constants.myName);
     if (Constants.myName != null) {
-      setState(() {
-        branch = branchMap[Constants.myName.substring(7, 9)];
-      });
+      // setState(() {
+      //   branch = branchMap[Constants.myName.substring(7, 9)];
+      // });
+      return branchMap[Constants.myName.substring(7, 9)];
     }
+    return null;
   }
 
-  persistData() async {
-    QuerySnapshot userSnap =
-        await databaseMethods.getUserByUsername(Constants.myName);
-    _userAddressController.text = userSnap.docs[0].data()["address"];
-    _userCGPAController.text = userSnap.docs[0].data()["cgpa"] == null
-        ? ""
-        : userSnap.docs[0].data()["cgpa"].toString();
-    _userDOBController.text = userSnap.docs[0].data()["DOB"];
-    _userEmailController.text = userSnap.docs[0].data()["personalMail"];
-    _userNameController.text = userSnap.docs[0].data()["fullname"];
-    _userPhoneController.text = userSnap.docs[0].data()["phone"];
-    _userTenthController.text = userSnap.docs[0].data()["tenth"] == null
-        ? ""
-        : userSnap.docs[0].data()["tenth"];
-    _userTwelfthController.text = userSnap.docs[0].data()["twelfth"] == null
-        ? ""
-        : userSnap.docs[0].data()["twelfth"];
-  }
+  // persistData() async {
+  //   QuerySnapshot userSnap =
+  //       await databaseMethods.getUserByUsername(Constants.myName);
+  //   _userAddressController.text = userSnap.docs[0].data()["address"];
+  //   _userCGPAController.text = userSnap.docs[0].data()["cgpa"] == null
+  //       ? ""
+  //       : userSnap.docs[0].data()["cgpa"].toString();
+  //   _userDOBController.text = userSnap.docs[0].data()["DOB"];
+  //   _userEmailController.text = userSnap.docs[0].data()["personalMail"];
+  //   _userNameController.text = userSnap.docs[0].data()["fullname"];
+  //   _userPhoneController.text = userSnap.docs[0].data()["phone"];
+  //   _userTenthController.text = userSnap.docs[0].data()["tenth"] == null
+  //       ? ""
+  //       : userSnap.docs[0].data()["tenth"];
+  //   _userTwelfthController.text = userSnap.docs[0].data()["twelfth"] == null
+  //       ? ""
+  //       : userSnap.docs[0].data()["twelfth"];
+  // }
 
   @override
   Widget build(BuildContext context) {
-    applyBranch();
-    persistData();
+    // applyBranch();
+    // persistData();
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
