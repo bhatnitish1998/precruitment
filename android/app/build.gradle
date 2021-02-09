@@ -22,7 +22,6 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
@@ -68,3 +67,5 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'  // <-- ADD THIS DEPENDENCY
 
 }
+
+apply plugin: 'com.google.gms.google-services'
