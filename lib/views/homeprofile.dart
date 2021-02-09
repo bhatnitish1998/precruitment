@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:precruitment/helper/constants.dart';
 import 'package:precruitment/helper/helperfunctions.dart';
 import 'package:precruitment/models/user.dart';
-import 'package:precruitment/views/home.dart';
 import 'package:precruitment/widgets/widget.dart';
 import 'package:flutter/services.dart';
 import 'package:precruitment/utilities/constants.dart';
@@ -26,7 +25,7 @@ class _HomeProfileState extends State<HomeProfile> {
   double twelfth;
   double tenth;
   int branch = 0;
-
+  bool loading = true;
   DatabaseMethods databaseMethods = new DatabaseMethods();
   QuerySnapshot snap;
 
@@ -50,6 +49,7 @@ class _HomeProfileState extends State<HomeProfile> {
           await databaseMethods.getUserByUsername(Constants.myName);
       setState(() {
         snap = temp;
+        loading = false;
       });
     });
     super.initState();
@@ -389,100 +389,106 @@ class _HomeProfileState extends State<HomeProfile> {
     // print(name);
     // QuerySnapshot userSnap;
     // userSnap = await persistData();
-    print(snap.docs[0].data()["name"]);
+    // print(snap.docs[0].data()["name"]);
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          // color: Color(0xFF6CA8F1),
-          child: Stack(
-            alignment: Alignment.topCenter,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(24),
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                  ),
-                ],
-              ),
-              CustomPaint(
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                ),
-                painter: HeaderCurvedContainer(),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Text(
-                      'Profile',
-                      style: TextStyle(
-                        fontSize: 35.0,
-                        letterSpacing: 1.5,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
+      body: loading
+          ? Container()
+          : SingleChildScrollView(
+              child: Container(
+                // color: Color(0xFF6CA8F1),
+                child: Stack(
+                  alignment: Alignment.topCenter,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(24),
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                        ),
+                      ],
+                    ),
+                    CustomPaint(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                      ),
+                      painter: HeaderCurvedContainer(),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Text(
+                            'Profile',
+                            style: TextStyle(
+                              fontSize: 35.0,
+                              letterSpacing: 1.5,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width / 2,
+                          height: MediaQuery.of(context).size.width / 2,
+                          padding: EdgeInsets.all(10.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white, width: 5),
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            image: DecorationImage(
+                              image:
+                                  ExactAssetImage("assets/images/default.jpg"),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Container(
+                            padding: EdgeInsets.all(24),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(height: 75),
+                                _buildUSN(snap.docs[0].data()["name"]),
+                                _buildName(snap.docs[0].data()["fullname"]),
+                                _buildEmail(
+                                    snap.docs[0].data()["personalMail"]),
+                                _buildPhone(snap.docs[0].data()["phone"]),
+                                _buildBranch(Constants
+                                    .branches[snap.docs[0].data()["branch"]]),
+                                _buildAddress(snap.docs[0].data()["address"]),
+                                _buildcgpa(
+                                    snap.docs[0].data()["cgpa"].toString()),
+                                _buildtenth(
+                                    snap.docs[0].data()["tenth"].toString()),
+                                _buildtwelfth(
+                                    snap.docs[0].data()["twelfth"].toString()),
+                                _buildDOB(snap.docs[0].data()["DOB"]),
+                                // RaisedButton(
+                                //     child: Text("Save Details"),
+                                //     onPressed: profileComplete)
+                              ],
+                            ))
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 210, left: 170),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.black54,
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.edit,
+                          ),
+                          onPressed: () {},
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2,
-                    height: MediaQuery.of(context).size.width / 2,
-                    padding: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.white, width: 5),
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                      image: DecorationImage(
-                        image: ExactAssetImage("assets/images/default.jpg"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Container(
-                      padding: EdgeInsets.all(24),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(height: 75),
-                          _buildUSN(snap.docs[0].data()["name"]),
-                          _buildName(snap.docs[0].data()["fullname"]),
-                          _buildEmail(snap.docs[0].data()["personalMail"]),
-                          _buildPhone(snap.docs[0].data()["phone"]),
-                          _buildBranch(Constants
-                              .branches[snap.docs[0].data()["branch"]]),
-                          _buildAddress(snap.docs[0].data()["address"]),
-                          _buildcgpa(snap.docs[0].data()["cgpa"].toString()),
-                          _buildtenth(snap.docs[0].data()["tenth"].toString()),
-                          _buildtwelfth(
-                              snap.docs[0].data()["twelfth"].toString()),
-                          _buildDOB(snap.docs[0].data()["DOB"]),
-                          // RaisedButton(
-                          //     child: Text("Save Details"),
-                          //     onPressed: profileComplete)
-                        ],
-                      ))
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 210, left: 170),
-                child: CircleAvatar(
-                  backgroundColor: Colors.black54,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.edit,
-                    ),
-                    onPressed: () {},
-                  ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }
