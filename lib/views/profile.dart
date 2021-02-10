@@ -2,9 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:precruitment/helper/constants.dart';
 import 'package:precruitment/helper/helperfunctions.dart';
-import 'package:precruitment/models/user.dart';
 import 'package:precruitment/views/home.dart';
-import 'package:precruitment/widgets/widget.dart';
 import 'package:flutter/services.dart';
 import 'package:precruitment/utilities/constants.dart';
 import 'package:precruitment/services/database.dart';
@@ -25,14 +23,7 @@ class _ProfileState extends State<Profile> {
   double tenth;
   int branch = 0;
 
-  // Map<String, String> userMapInfo = {
-  //       "name": userNameTextEditingController.text,
-  //       "email": emailTextEditingController.text
-  //     };
-
-// List<Offer._id> appliedOffers;
   DatabaseMethods databaseMethods = new DatabaseMethods();
-  User user = User();
   TextEditingController _userNameController = TextEditingController();
   TextEditingController _userEmailController = TextEditingController();
   TextEditingController _userPhoneController = TextEditingController();
@@ -41,8 +32,6 @@ class _ProfileState extends State<Profile> {
   TextEditingController _userTenthController = TextEditingController();
   TextEditingController _userTwelfthController = TextEditingController();
   TextEditingController _userDOBController = TextEditingController();
-// TextEditingController _userNameController = TextEditingController();
-// TextEditingController _userNameController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -510,19 +499,19 @@ class _ProfileState extends State<Profile> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: profileComplete,
-        padding: EdgeInsets.all(15.0),
+        padding: EdgeInsets.all(14.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
         ),
         color: Color(0xFF527DAA),
         child: Text(
           'Save Details',
+          textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.white,
             letterSpacing: 1.5,
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
-            // fontFamily: 'OpenSans',
           ),
         ),
       ),
@@ -539,39 +528,14 @@ class _ProfileState extends State<Profile> {
       "EC": 5,
       "ME": 6,
     };
-    print(Constants.myName);
     if (Constants.myName != null) {
-      // setState(() {
-      //   branch = branchMap[Constants.myName.substring(7, 9)];
-      // });
       return branchMap[Constants.myName.substring(7, 9)];
     }
     return null;
   }
 
-  // persistData() async {
-  //   QuerySnapshot userSnap =
-  //       await databaseMethods.getUserByUsername(Constants.myName);
-  //   _userAddressController.text = userSnap.docs[0].data()["address"];
-  //   _userCGPAController.text = userSnap.docs[0].data()["cgpa"] == null
-  //       ? ""
-  //       : userSnap.docs[0].data()["cgpa"].toString();
-  //   _userDOBController.text = userSnap.docs[0].data()["DOB"];
-  //   _userEmailController.text = userSnap.docs[0].data()["personalMail"];
-  //   _userNameController.text = userSnap.docs[0].data()["fullname"];
-  //   _userPhoneController.text = userSnap.docs[0].data()["phone"];
-  //   _userTenthController.text = userSnap.docs[0].data()["tenth"] == null
-  //       ? ""
-  //       : userSnap.docs[0].data()["tenth"];
-  //   _userTwelfthController.text = userSnap.docs[0].data()["twelfth"] == null
-  //       ? ""
-  //       : userSnap.docs[0].data()["twelfth"];
-  // }
-
   @override
   Widget build(BuildContext context) {
-    // applyBranch();
-    // persistData();
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -641,9 +605,6 @@ class _ProfileState extends State<Profile> {
                               _buildtwelfth(),
                               _buildDOB(),
                               _buildLoginBtn(),
-                              // RaisedButton(
-                              //     child: Text("Save Details"),
-                              //     onPressed: profileComplete)
                             ],
                           )))
                 ],

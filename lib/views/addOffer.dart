@@ -73,9 +73,9 @@ class _AddOfferState extends State<AddOffer> {
   selectTestDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
-      initialDate: testDate, // Refer step 1
+      initialDate: testDate,
       firstDate: DateTime(2000),
-      lastDate: DateTime(2025),
+      lastDate: DateTime(2030),
     );
     if (picked != null && picked != testDate)
       setState(() {
@@ -86,7 +86,7 @@ class _AddOfferState extends State<AddOffer> {
   selectDeadlineDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
-      initialDate: deadline, // Refer step 1
+      initialDate: deadline,
       firstDate: DateTime(2000),
       lastDate: DateTime(2025),
     );
@@ -112,10 +112,12 @@ class _AddOfferState extends State<AddOffer> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextFormField(
+                      // TODO,
                       controller: companyTextEditingController,
                       decoration: InputDecoration(
                         hintText: "Company Name",
                       ),
+                      // validator:
                     ),
                     TextFormField(
                       controller: roleTextEditingController,
@@ -141,7 +143,6 @@ class _AddOfferState extends State<AddOffer> {
                         hintText: "12th",
                       ),
                     ),
-
                     TextFormField(
                       controller: lpaTextEditingController,
                       decoration: InputDecoration(
@@ -176,12 +177,6 @@ class _AddOfferState extends State<AddOffer> {
                       ],
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                     ),
-                    // TextFormField(
-                    //   controller: testDateTextEditingController,
-                    //   decoration: InputDecoration(
-                    //     hintText: "TestDate",
-                    //   ),
-                    // ),
                     TextFormField(
                       controller: descriptionTextEditingController,
                       decoration: InputDecoration(

@@ -4,7 +4,6 @@ import 'package:precruitment/helper/helperfunctions.dart';
 import 'package:precruitment/services/auth.dart';
 import 'package:precruitment/services/database.dart';
 import 'package:precruitment/views/conversation_screen.dart';
-// import 'package:precruitment/views/signin.dart';
 
 class ChatRoom extends StatefulWidget {
   @override
@@ -55,46 +54,11 @@ class _ChatRoomState extends State<ChatRoom> {
         chatRoomsStream = value;
       });
     });
-    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return chatRoomsList();
-    // return Scaffold(
-    // appBar: AppBar(
-    // title: Text("Precruitment"),
-    // actions: [
-    // GestureDetector(
-    // onTap: () {
-    // authMethods.signOut();
-    // HelperFunctions.saveUserLoggedInSharedPreference(false);
-    // Navigator.pushReplacement(
-    // context,
-    // MaterialPageRoute(
-    //       builder: (context) => Authenticate(),
-    //     ),
-    //   );
-    // },
-    // child: Container(
-    // padding: EdgeInsets.symmetric(horizontal: 16),
-    // child: Icon(Icons.exit_to_app)),
-    // ),
-    // ],
-    // ),
-    // body: chatRoomsList(),
-    //   floatingActionButton: FloatingActionButton(
-    //     child: Icon(Icons.search),
-    //     onPressed: () {
-    //       Navigator.push(
-    //         context,
-    //         MaterialPageRoute(
-    //           builder: (context) => SearchScreen(),
-    //         ),
-    //       );
-    //     },
-    //   ),
-    // );
   }
 }
 

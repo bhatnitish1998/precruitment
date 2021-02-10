@@ -27,12 +27,14 @@ class _SignInState extends State<SignIn> {
       new TextEditingController();
   TextEditingController passwordTextEditingController =
       new TextEditingController();
+
   QuerySnapshot snapshotUserInfo;
 
   signIn() {
     if (formkey.currentState.validate()) {
       Dialogs.showLoadingDialog(context, loadkey); //here
-
+      emailTextEditingController.text =
+          emailTextEditingController.text.trim().toLowerCase();
       HelperFunctions.saveUserEmailSharedPreference(
           emailTextEditingController.text);
 
@@ -59,7 +61,6 @@ class _SignInState extends State<SignIn> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              // builder: (context) => ChatRoom(),
               builder: (context) => Home(),
             ),
           );
@@ -74,7 +75,7 @@ class _SignInState extends State<SignIn> {
       appBar: appBarMain(context),
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height - 50,
+          height: MediaQuery.of(context).size.height,
           alignment: Alignment.bottomCenter,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 24),
@@ -89,7 +90,7 @@ class _SignInState extends State<SignIn> {
                         validator: (val) {
                           return RegExp(
                                       r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
-                                  .hasMatch(val)
+                                  .hasMatch(val.trim())
                               ? null
                               : "Bad Email";
                         },
@@ -101,7 +102,9 @@ class _SignInState extends State<SignIn> {
                       TextFormField(
                         obscureText: true,
                         validator: (val) {
-                          return val.length < 6 ? "Invalid Password" : null;
+                          return val.trim().length < 6
+                              ? "Invalid Password"
+                              : null;
                         },
                         controller: passwordTextEditingController,
                         decoration: InputDecoration(

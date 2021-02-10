@@ -9,32 +9,25 @@ class AluminiScreen extends StatelessWidget {
   static final routeName = "/alumini";
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: filePicker,
-            )
-          ],
-          title: Text("Alumini Corner"),
-        ),
-        body: StreamBuilder(
-          stream:
-              FirebaseFirestore.instance.collection("file_links").snapshots(),
-          builder: (context, snapshot) {
-            return snapshot.hasData
-                ? ListView.builder(
-                    itemCount: snapshot.data.documents.length,
-                    itemBuilder: (context, index) {
-                      return FileView(
-                          snapshot.data.documents[index]['fileName'],
-                          snapshot.data.documents[index]['fileUrl']);
-                    },
-                  )
-                : Container();
-          },
-        ));
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection("file_links").snapshots(),
+      builder: (context, snapshot) {
+        return snapshot.hasData
+            ? ListView.builder(
+                itemCount: snapshot.data.documents.length,
+                itemBuilder: (context, index) {
+                  return FileView(snapshot.data.documents[index]['fileName'],
+                      snapshot.data.documents[index]['fileUrl']);
+                },
+              )
+            : Container(
+                child: Center(
+                  child: Text("No files available."),
+                ),
+              );
+      },
+      // ),
+    );
   }
 }
 
@@ -42,10 +35,6 @@ void filePicker() async {
   FilePickerResult result = await FilePicker.platform.pickFiles();
   if (result != null) {
     PlatformFile file = result.files.first;
-
-    // print(file.name);
-    // print(file.extension);
-    // print(file.path);
     final ref = firebase_storage.FirebaseStorage.instance
         .ref()
         .child('alumini_files')

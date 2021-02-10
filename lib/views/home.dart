@@ -7,7 +7,6 @@ import 'package:precruitment/views/addOffer.dart';
 import 'package:precruitment/views/chatRoomsScreen.dart';
 import 'package:precruitment/views/homeprofile.dart';
 import 'package:precruitment/views/offers.dart';
-import 'package:precruitment/views/profile.dart';
 import 'package:precruitment/views/search.dart';
 import 'package:precruitment/views/alumini_screen.dart';
 
@@ -40,6 +39,7 @@ class _HomeState extends State<Home> {
     ),
     FloatingActionButton(
       onPressed: null,
+      child: Icon(Icons.add),
     ),
   ];
 
@@ -56,6 +56,8 @@ class _HomeState extends State<Home> {
           } else if (_currentIndex == 1) {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => SearchScreen()));
+          } else if (_currentIndex == 3) {
+            filePicker();
           }
         },
       ),
@@ -81,29 +83,6 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: _widgetOptions.elementAt(_currentIndex),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   currentIndex: _currentIndex,
-      //   onTap: (value) {
-      //     setState(() {
-      //       _currentIndex = value;
-      //     });
-      //   },
-      //   type: BottomNavigationBarType.fixed,
-
-      //   backgroundColor: Colors.blue,
-      //   selectedItemColor: Colors.white,
-      //   unselectedItemColor: Colors.white.withOpacity(.60),
-      //   // selectedFontSize: 15,
-      //   // unselectedFontSize: 10,
-      //   items: [
-      //     BottomNavigationBarItem(
-      //       label: "Offers",
-      //       icon: Icon(Icons.notes),
-      //     ),
-      //     BottomNavigationBarItem(label: "Chat", icon: Icon(Icons.chat)),
-      //     BottomNavigationBarItem(label: "Profile", icon: Icon(Icons.face)),
-      //   ],
-      // ),
       bottomNavigationBar: BottomAppBar(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -185,7 +164,6 @@ class _HomeState extends State<Home> {
           ),
         ),
         shape: CircularNotchedRectangle(),
-        // color: Colors.blueGrey,
       ),
     );
   }

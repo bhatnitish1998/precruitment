@@ -3,10 +3,7 @@ import 'package:precruitment/helper/constants.dart';
 import 'package:precruitment/helper/helperfunctions.dart';
 import 'package:precruitment/services/auth.dart';
 import 'package:precruitment/services/database.dart';
-import 'package:precruitment/views/profile.dart';
 import 'package:precruitment/views/verify.dart';
-// import 'package:precruitment/views/home.dart';
-// import 'package:precruitment/views/profile.dart';
 import 'package:precruitment/widgets/widget.dart';
 
 class SignUp extends StatefulWidget {
@@ -18,7 +15,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  bool isLoading = false;
+  bool _isLoading = false;
   AuthMethods authMethods = new AuthMethods();
   DatabaseMethods databaseMethods = new DatabaseMethods();
 
@@ -34,6 +31,11 @@ class _SignUpState extends State<SignUp> {
 
   signMeUp() {
     if (formkey.currentState.validate()) {
+      userNameTextEditingController.text =
+          userNameTextEditingController.text.trim().toUpperCase();
+      emailTextEditingController.text =
+          emailTextEditingController.text.trim().toLowerCase();
+
       Map<String, String> userMapInfo = {
         "name": userNameTextEditingController.text,
         "email": emailTextEditingController.text
@@ -41,12 +43,13 @@ class _SignUpState extends State<SignUp> {
 
       HelperFunctions.saveUserNameSharedPreference(
           userNameTextEditingController.text);
-      Constants.myName = userNameTextEditingController.text;
       HelperFunctions.saveUserEmailSharedPreference(
           emailTextEditingController.text);
 
+      Constants.myName = userNameTextEditingController.text;
+
       setState(() {
-        isLoading = true;
+        _isLoading = true;
       });
 
       authMethods
@@ -69,7 +72,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarMain(context),
-      body: isLoading
+      body: _isLoading
           ? Container(
               child: Center(
                 child: CircularProgressIndicator(),
@@ -77,7 +80,7 @@ class _SignUpState extends State<SignUp> {
             )
           : SingleChildScrollView(
               child: Container(
-                height: MediaQuery.of(context).size.height - 50,
+                height: MediaQuery.of(context).size.height,
                 alignment: Alignment.bottomCenter,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 24),
@@ -90,7 +93,8 @@ class _SignUpState extends State<SignUp> {
                           children: [
                             TextFormField(
                               validator: (val) {
-                                return val.isEmpty || val.length < 4
+                                return val.trim().isEmpty ||
+                                        val.trim().length < 4
                                     ? "Bad Username"
                                     : null;
                               },
@@ -103,7 +107,7 @@ class _SignUpState extends State<SignUp> {
                               validator: (val) {
                                 return RegExp(
                                             r"^01(fe|FE)\d\d(b|B)[a-zA-Z][a-zA-Z]\d\d\d@(kletech.ac.in|KLETECH.AC.IN)$")
-                                        .hasMatch(val)
+                                        .hasMatch(val.trim())
                                     ? null
                                     : "Please enter a valid KLE Tech Email ID";
                               },
@@ -130,14 +134,14 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(
                         height: 8,
                       ),
-                      Container(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          child: Text("Forgot Password?"),
-                        ),
-                      ),
+                      // Container(
+                      //   alignment: Alignment.centerRight,
+                      //   child: Container(
+                      //     padding:
+                      //         EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      //     child: Text("Forgot Password?"),
+                      //   ),
+                      // ),//TODO
                       SizedBox(height: 8),
                       GestureDetector(
                         onTap: () {
@@ -146,7 +150,7 @@ class _SignUpState extends State<SignUp> {
                         child: RaisedButton(
                           child: Text(
                             "Signup",
-                            style: TextStyle(color: Colors.black),
+                            style: TextStyle(color: Colors.white),
                           ),
                           onPressed: null,
                         ),

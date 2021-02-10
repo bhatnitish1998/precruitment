@@ -22,7 +22,7 @@ class _SearchScreenState extends State<SearchScreen> {
             itemCount: searchSnapshot.docs.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              return SearchTile(
+              return searchTile(
                 userName: searchSnapshot.docs[index].data()["name"],
                 userEmail: searchSnapshot.docs[index].data()["email"],
               );
@@ -56,7 +56,7 @@ class _SearchScreenState extends State<SearchScreen> {
     }
   }
 
-  Widget SearchTile({String userName, String userEmail}) {
+  Widget searchTile({String userName, String userEmail}) {
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: Row(

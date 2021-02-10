@@ -69,9 +69,6 @@ class _ApplyScreenState extends State<ApplyScreen> {
         _inelligible = true;
       }
       if (!_inelligible) {
-        print("Applied!!!!!!!");
-        // print(widget.id);
-        // print(Constants.myName);
         databaseMethods.addUserToOffer(widget.id, Constants.myName);
         return true;
       } else {
@@ -79,109 +76,6 @@ class _ApplyScreenState extends State<ApplyScreen> {
         return false;
       }
     }
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: Text(widget.company),
-    //   ),
-    //   body: ListView(
-    //     children: [
-    //       Text("Role: ${widget.role}"),
-    //       Text("Test: ${widget.testDate}"),
-    //       Row(
-    //         children: [
-    //           Text("CGPA: ${widget.cgpa}"),
-    //           Text("10th: ${widget.tenth}"),
-    //           Text("12th: ${widget.twelfth}"),
-    //         ],
-    //       ),
-    //       Text(widget.deadline),
-    //       Text(widget.description),
-    //       Text("Salary ${widget.salary}"),
-    //       SizedBox(
-    //         height: 8,
-    //       ),
-    //       RaisedButton(
-    //         onPressed: _isButtonDisabled
-    //             ? () {
-    //                 applyMe();
-    //               }
-    //             : null,
-    //         child: Text("Apply"),
-    //       )
-    //     ],
-    //   ),
-    // );
-
-    // final topContentText = Column(
-    //   crossAxisAlignment: CrossAxisAlignment.start,
-    //   children: <Widget>[
-    //     SizedBox(height: 100.0),
-    // Icon(
-    //   Icons.directions_car,
-    //   color: Colors.white,
-    //   size: 40.0,
-    // ),
-
-    //     SizedBox(height: 10.0),
-    //     Text(
-    //       "${widget.role}",
-    //       style: TextStyle(color: Colors.white, fontSize: 35.0),
-    //     ),
-    //     Container(
-    //       width: 90.0,
-    //       child: new Divider(color: Colors.green),
-    //     ),
-    //     SizedBox(height: 30.0),
-    //     Row(
-    //       mainAxisAlignment: MainAxisAlignment.start,
-    //       children: <Widget>[
-    //         // Expanded(flex: 1, child: levelIndicator),
-    //         Expanded(
-    //             flex: 6,
-    //             child: Padding(
-    //                 padding: EdgeInsets.only(left: 10.0),
-    //                 child: Text(
-    //                   "${widget.testDate}",
-    //                   style: TextStyle(color: Colors.white),
-    //                 ))),
-    //         // Expanded(flex: 1, child: coursePrice)
-    //       ],
-    //     ),
-    //   ],
-    // );
-
-    // final topContent = Stack(
-    //   children: <Widget>[
-    //     Container(
-    //         padding: EdgeInsets.only(left: 10.0),
-    //         // height: MediaQuery.of(context).size.height * 0.5,
-    //         decoration: new BoxDecoration(
-    //           image: new DecorationImage(
-    //             image: new AssetImage("assets/images/google.png"),
-    //             fit: BoxFit.cover,
-    //           ),
-    //         )),
-    //     Container(
-    //       height: MediaQuery.of(context).size.height * 0.5,
-    //       padding: EdgeInsets.all(40.0),
-    //       width: MediaQuery.of(context).size.width,
-    //       decoration: BoxDecoration(color: Color.fromRGBO(58, 66, 86, .9)),
-    //       child: Center(
-    //         child: topContentText,
-    //       ),
-    //     ),
-    // Positioned(
-    //   left: 8.0,
-    //   top: 60.0,
-    //   child: InkWell(
-    //     onTap: () {
-    //       Navigator.pop(context);
-    //     },
-    //     child: Icon(Icons.arrow_back, color: Colors.white),
-    //   ),
-    // )
-    // ],
-    // );
 
     final bottomContentText = Column(
       children: [
@@ -273,47 +167,31 @@ class _ApplyScreenState extends State<ApplyScreen> {
           bottomContentText,
           readButton,
           excelButton,
-          // RaisedButton(
-          //   onPressed: () {
-          //     createExcel("Generic Co.", widget.role);
-          //   },
-          //   child: Text("Generate Excel Sheet"),
-          // )
         ],
       ),
     );
 
     return Scaffold(
-        body: CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          // Allows the user to reveal the app bar if they begin scrolling back
-          // up the list of items.
-          floating: true,
-          // Display a placeholder widget to visualize the shrinking size.
-          flexibleSpace: FlexibleSpaceBar(
-            title: Text("${widget.role}"),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            floating: true,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text("${widget.role}"),
+            ),
+            pinned: true,
+            expandedHeight: 300,
           ),
-          pinned: true,
-          // Make the initial height of the SliverAppBar larger than normal.
-          expandedHeight: 300,
-        ),
-        SliverList(
-          // Use a delegate to build items as they're scrolled on screen.
-          delegate: SliverChildBuilderDelegate(
-            // The builder function returns a ListTile with a title that
-            // displays the index of the current item.
-            (context, index) {
-              return bottomContent;
-            },
-            childCount: 1,
-          ),
-        )
-      ],
-    )
-        // body: Column(
-        //   children: [topContent, bottomContent],
-        // ),
-        );
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return bottomContent;
+              },
+              childCount: 1,
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

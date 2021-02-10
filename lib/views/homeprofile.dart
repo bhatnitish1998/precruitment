@@ -1,12 +1,6 @@
-import 'dart:typed_data';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:precruitment/helper/constants.dart';
-import 'package:precruitment/helper/helperfunctions.dart';
-import 'package:precruitment/models/user.dart';
-import 'package:precruitment/widgets/widget.dart';
-import 'package:flutter/services.dart';
 import 'package:precruitment/utilities/constants.dart';
 import 'package:precruitment/services/database.dart';
 
@@ -29,22 +23,10 @@ class _HomeProfileState extends State<HomeProfile> {
   DatabaseMethods databaseMethods = new DatabaseMethods();
   QuerySnapshot snap;
 
-  // TextEditingController _userNameController = TextEditingController();
-  // TextEditingController _userEmailController = TextEditingController();
-  // TextEditingController _userPhoneController = TextEditingController();
-  // TextEditingController _userAddressController = TextEditingController();
-  // TextEditingController _userCGPAController = TextEditingController();
-  // TextEditingController _userTenthController = TextEditingController();
-  // TextEditingController _userTwelfthController = TextEditingController();
-  // TextEditingController _userDOBController = TextEditingController();
-// TextEditingController _userNameController = TextEditingController();
-// TextEditingController _userNameController = TextEditingController();
-
-  // final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   initState() {
     Future.delayed(Duration.zero).then((_) async {
-      print("Called future init");
+      // print("Called future init");
       QuerySnapshot temp =
           await databaseMethods.getUserByUsername(Constants.myName);
       setState(() {
@@ -365,31 +347,8 @@ class _HomeProfileState extends State<HomeProfile> {
     );
   }
 
-  // persistData() async {
-  //   _userAddressController.text = userSnap.docs[0].data()["address"];
-  //   _userCGPAController.text = userSnap.docs[0].data()["cgpa"] == null
-  //       ? ""
-  //       : userSnap.docs[0].data()["cgpa"].toString();
-  //   _userDOBController.text = userSnap.docs[0].data()["DOB"];
-  //   _userEmailController.text = userSnap.docs[0].data()["personalMail"];
-  //   _userNameController.text = userSnap.docs[0].data()["fullname"];
-  //   _userPhoneController.text = userSnap.docs[0].data()["phone"];
-  //   _userTenthController.text = userSnap.docs[0].data()["tenth"] == null
-  //       ? ""
-  //       : userSnap.docs[0].data()["tenth"];
-  //   _userTwelfthController.text = userSnap.docs[0].data()["twelfth"] == null
-  //       ? ""
-  //       : userSnap.docs[0].data()["twelfth"];
-  // return userSnap;
-  // }
-
   @override
   Widget build(BuildContext context) {
-    // applyBranch();
-    // print(name);
-    // QuerySnapshot userSnap;
-    // userSnap = await persistData();
-    // print(snap.docs[0].data()["name"]);
     return Scaffold(
       body: loading
           ? Container()
@@ -466,9 +425,6 @@ class _HomeProfileState extends State<HomeProfile> {
                                 _buildtwelfth(
                                     snap.docs[0].data()["twelfth"].toString()),
                                 _buildDOB(snap.docs[0].data()["DOB"]),
-                                // RaisedButton(
-                                //     child: Text("Save Details"),
-                                //     onPressed: profileComplete)
                               ],
                             ))
                       ],

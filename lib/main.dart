@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-// import 'package:precruitment/views/signin.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:precruitment/helper/authenticate.dart';
 import 'package:precruitment/helper/helperfunctions.dart';
-// import 'package:precruitment/views/chatRoomsScreen.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:precruitment/views/home.dart';
-// import 'package:precruitment/views/signup.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await FlutterDownloader.initialize(debug: true); //TODO
+  await FlutterDownloader.initialize(debug: false);
   runApp(MyApp());
 }
 
@@ -26,7 +23,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    getLoggedInState();
+    Future.delayed(Duration.zero).then((_) async {
+      await getLoggedInState();
+    });
     super.initState();
   }
 
@@ -42,7 +41,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // print(userIsLoggedIn);
     return MaterialApp(
       title: 'Precruitment',
       theme: ThemeData(
@@ -52,10 +50,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-// class IamBlank extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }

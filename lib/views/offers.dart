@@ -168,21 +168,13 @@ class _OffersState extends State<Offers> {
             : Container();
       },
     );
-    // return ListView(
-    //   children: [
-    //     OfferTile(
-    //       cgpa: "10",
-    //       companyName: "hubli",
-    //       deadline: "123",
-    //       role: "bb",
-    //     ),
-    //   ],
-    // );
   }
 
   @override
   void initState() {
-    getOffers();
+    Future.delayed(Duration.zero).then((_) async {
+      await getOffers();
+    });
     super.initState();
   }
 
@@ -197,7 +189,6 @@ class _OffersState extends State<Offers> {
         offersStream = value;
       });
     });
-    setState(() {});
   }
 
   @override

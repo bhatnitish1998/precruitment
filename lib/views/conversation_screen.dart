@@ -16,7 +16,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
   TextEditingController messageController = new TextEditingController();
   Stream chatMessagesStream;
 
-  Widget ChatMessageList() {
+  Widget chatMessageList() {
     return StreamBuilder(
         stream: chatMessagesStream,
         builder: (context, snapshot) {
@@ -64,7 +64,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
         body: Container(
           child: Stack(
             children: [
-              ChatMessageList(),
+              chatMessageList(),
               Container(
                 alignment: Alignment.bottomCenter,
                 child: Container(
@@ -125,9 +125,9 @@ class MessageTile extends StatelessWidget {
           padding: EdgeInsets.only(top: 17, bottom: 17, left: 20, right: 20),
           decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors:isSentByMe
-                    ? [const Color(0xff007EF4), const Color(0xff2A75BC)]
-                    : [const Color(0x9c2A75BC), const Color(0x9c2A75BC)]),
+                  colors: isSentByMe
+                      ? [const Color(0xff007EF4), const Color(0xff2A75BC)]
+                      : [const Color(0x9c2A75BC), const Color(0x9c2A75BC)]),
               borderRadius: isSentByMe
                   ? BorderRadius.only(
                       topLeft: Radius.circular(23),
