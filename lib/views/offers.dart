@@ -165,7 +165,11 @@ class _OffersState extends State<Offers> {
                     testDate: snapshot.data.documents[index].data()['testDate'],
                   );
                 })
-            : Container();
+            : Container(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
       },
     );
   }

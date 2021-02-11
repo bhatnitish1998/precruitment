@@ -94,39 +94,50 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appBarMain(context),
-        body: Container(
-            child: Column(children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-            color: Color(0x54FFFFFF),
-            child: Row(children: [
-              Expanded(
-                child: TextField(
-                  controller: searchEditingController,
-                  decoration: InputDecoration(
-                      hintText: "search username ...",
-                      hintStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                      border: InputBorder.none),
-                ),
+      appBar: appBarMain(context),
+      body: Container(
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              color: Color(0x54FFFFFF),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: searchEditingController,
+                      decoration: InputDecoration(
+                          hintText: "Search Username ...",
+                          hintStyle: TextStyle(
+                            // color: Colors.white,
+                            fontSize: 16,
+                          ),
+                          border: InputBorder.none),
+                    ),
+                  ),
+                  InkWell(
+                      onTap: () {
+                        initiateSearch();
+                      },
+                      child: Container(
+                          height: 40,
+                          width: 40,
+                          padding: EdgeInsets.all(8),
+                          child: Icon(Icons.search))),
+                ],
               ),
-              GestureDetector(
-                onTap: () {
-                  initiateSearch();
-                },
-                child: Container(
-                    height: 40,
-                    width: 40,
-                    padding: EdgeInsets.all(8),
-                    child: Icon(Icons.search)),
-              ),
-            ]),
-          ),
-          searchList()
-        ])));
+            ),
+            Container(
+              // margin: new EdgeInsets.symmetric(vertical: 2.0),
+              height: 2.0,
+              width: MediaQuery.of(context).size.width,
+              color: new Color(0xff00c6ff),
+            ),
+            searchList()
+          ],
+        ),
+      ),
+    );
   }
 }
 
