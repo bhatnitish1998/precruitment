@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:precruitment/helper/constants.dart';
-import 'package:precruitment/utilities/constants.dart';
 import 'package:precruitment/services/database.dart';
+import 'package:precruitment/widgets/widget.dart';
 
 class HomeProfile extends StatefulWidget {
   @override

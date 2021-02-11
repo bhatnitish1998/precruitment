@@ -26,7 +26,6 @@ class AluminiScreen extends StatelessWidget {
                 ),
               );
       },
-      // ),
     );
   }
 }

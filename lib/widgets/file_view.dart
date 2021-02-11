@@ -23,6 +23,7 @@ class FileView extends StatelessWidget {
               await DownloadsPathProvider.downloadsDirectory;
           await FlutterDownloader.enqueue(
             url: url,
+            fileName: name,
             savedDir: downloadsDirectory.path,
             showNotification:
                 true, // show download progress in status bar (for Android)

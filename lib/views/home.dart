@@ -95,9 +95,14 @@ class _HomeState extends State<Home> {
                   height: 40.0,
                   child: Column(
                     children: [
-                      Icon(Icons.article_outlined),
+                      Icon(
+                        Icons.article_outlined,
+                        color: _currentIndex == 0 ? Colors.blue : null,
+                      ),
                       Text(
                         "Offers",
+                        style: TextStyle(
+                            color: _currentIndex == 0 ? Colors.blue : null),
                       ),
                     ],
                   ),
@@ -113,10 +118,15 @@ class _HomeState extends State<Home> {
                   height: 40.0,
                   child: Column(
                     children: [
-                      Icon(Icons.forum_outlined),
+                      Icon(
+                        Icons.forum_outlined,
+                        color: _currentIndex == 1 ? Colors.blue : null,
+                      ),
                       Text(
                         "Chat",
-                      )
+                        style: TextStyle(
+                            color: _currentIndex == 1 ? Colors.blue : null),
+                      ),
                     ],
                   ),
                 ),
@@ -131,10 +141,15 @@ class _HomeState extends State<Home> {
                   height: 40.0,
                   child: Column(
                     children: [
-                      Icon(Icons.person_outline),
+                      Icon(
+                        Icons.person_outline,
+                        color: _currentIndex == 2 ? Colors.blue : null,
+                      ),
                       Text(
                         "Profile",
-                      )
+                        style: TextStyle(
+                            color: _currentIndex == 2 ? Colors.blue : null),
+                      ),
                     ],
                   ),
                 ),
@@ -149,8 +164,15 @@ class _HomeState extends State<Home> {
                   height: 40.0,
                   child: Column(
                     children: [
-                      Icon(Icons.emoji_events_outlined),
-                      Text("Inspiration")
+                      Icon(
+                        Icons.emoji_events_outlined,
+                        color: _currentIndex == 3 ? Colors.blue : null,
+                      ),
+                      Text(
+                        "Inspiration",
+                        style: TextStyle(
+                            color: _currentIndex == 3 ? Colors.blue : null),
+                      ),
                     ],
                   ),
                 ),

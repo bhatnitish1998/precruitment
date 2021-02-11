@@ -3,7 +3,6 @@ import 'package:precruitment/models/user.dart';
 import 'package:precruitment/views/home.dart';
 import 'package:precruitment/widgets/widget.dart';
 import 'package:flutter/services.dart';
-import 'package:precruitment/utilities/constants.dart';
 import 'package:precruitment/services/database.dart';
 
 class Profile extends StatefulWidget {
