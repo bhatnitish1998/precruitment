@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:precruitment/helper/constants.dart';
 import 'package:precruitment/helper/helperfunctions.dart';
@@ -157,7 +158,6 @@ class _OffersState extends State<Offers> {
                         snapshot.data.documents[index].data()['description'],
                     salary: snapshot.data.documents[index]
                         .data()['salary']
-                        .toString()
                         .toString(),
                     tenth: snapshot.data.documents[index].data()['minTenth'],
                     twelfth:
@@ -183,10 +183,11 @@ class _OffersState extends State<Offers> {
   }
 
   getOffers() async {
-    Constants.myName = await HelperFunctions.getUserNameSharedPreference();
+    // Constants.myName = await HelperFunctions.getUserNameSharedPreference();
     // int branch = databaseMethods.getUserByUsername(Constants.myName)['branch'];
-    QuerySnapshot bsnap =
-        await databaseMethods.getUserByUsername(Constants.myName);
+    QuerySnapshot bsnap = await databaseMethods
+        .getUserByUid(FirebaseAuth.instance.currentUser.uid);
+    // print(FirebaseAuth.instance.currentUser.uid);
     // print(bsnap.docs[0].data()['branch']);
     databaseMethods.getOffers(bsnap.docs[0].data()['branch']).then((value) {
       setState(() {

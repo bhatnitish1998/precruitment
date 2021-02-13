@@ -56,6 +56,7 @@ class _SignUpState extends State<SignUp> {
           .signUpWithEmailAndPassword(emailTextEditingController.text,
               passwordTextEditingController.text)
           .then((value) {
+        userMapInfo["uid"] = value;
         databaseMethods.uploadUserInfo(userMapInfo);
         HelperFunctions.saveUserLoggedInSharedPreference(true);
         Navigator.pushReplacement(

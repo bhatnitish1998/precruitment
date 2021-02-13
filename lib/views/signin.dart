@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:precruitment/helper/helperfunctions.dart';
 import 'package:precruitment/services/auth.dart';
 import 'package:precruitment/services/database.dart';
 import 'package:precruitment/views/home.dart';
+import 'package:precruitment/views/verify.dart';
 import 'package:precruitment/widgets/dialogs.dart';
 import 'package:precruitment/widgets/widget.dart';
 
@@ -55,15 +57,26 @@ class _SignInState extends State<SignIn> {
               passwordTextEditingController.text)
           .then((value) {
         if (value != null) {
-          Navigator.of(loadkey.currentContext, rootNavigator: true)
-              .pop(); //here
-          HelperFunctions.saveUserLoggedInSharedPreference(true);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Home(),
-            ),
-          );
+          if (FirebaseAuth.instance.currentUser.emailVerified == false) {
+            Navigator.of(loadkey.currentContext, rootNavigator: true)
+                .pop(); //here
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Verify(),
+              ),
+            );
+          } else {
+            Navigator.of(loadkey.currentContext, rootNavigator: true)
+                .pop(); //here
+            HelperFunctions.saveUserLoggedInSharedPreference(true);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Home(),
+              ),
+            );
+          }
         }
       });
     }

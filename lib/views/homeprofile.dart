@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:precruitment/helper/constants.dart';
 import 'package:precruitment/services/database.dart';
@@ -26,9 +27,8 @@ class _HomeProfileState extends State<HomeProfile> {
   @override
   initState() {
     Future.delayed(Duration.zero).then((_) async {
-      // print("Called future init");
-      QuerySnapshot temp =
-          await databaseMethods.getUserByUsername(Constants.myName);
+      QuerySnapshot temp = await databaseMethods
+          .getUserByUid(FirebaseAuth.instance.currentUser.uid);
       setState(() {
         snap = temp;
         loading = false;
@@ -351,7 +351,11 @@ class _HomeProfileState extends State<HomeProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: loading
-          ? Container()
+          ? Container(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            )
           : SingleChildScrollView(
               child: Container(
                 // color: Color(0xFF6CA8F1),
