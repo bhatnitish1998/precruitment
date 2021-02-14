@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:precruitment/helper/constants.dart';
-import 'package:precruitment/helper/helperfunctions.dart';
 import 'package:precruitment/services/database.dart';
 import 'package:precruitment/views/applyScreen.dart';
 
@@ -176,22 +174,18 @@ class _OffersState extends State<Offers> {
 
   @override
   void initState() {
-    Future.delayed(Duration.zero).then((_) async {
-      await getOffers();
-    });
+    getOffers();
     super.initState();
   }
 
-  getOffers() async {
-    // Constants.myName = await HelperFunctions.getUserNameSharedPreference();
-    // int branch = databaseMethods.getUserByUsername(Constants.myName)['branch'];
-    QuerySnapshot bsnap = await databaseMethods
-        .getUserByUid(FirebaseAuth.instance.currentUser.uid);
-    // print(FirebaseAuth.instance.currentUser.uid);
-    // print(bsnap.docs[0].data()['branch']);
-    databaseMethods.getOffers(bsnap.docs[0].data()['branch']).then((value) {
-      setState(() {
-        offersStream = value;
+  getOffers() {
+    databaseMethods
+        .getUserByUid(FirebaseAuth.instance.currentUser.uid)
+        .then((snap) {
+      databaseMethods.getOffers(snap.docs[0].data()['branch']).then((value) {
+        setState(() {
+          offersStream = value;
+        });
       });
     });
   }

@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
   List<FloatingActionButton> _fabOptions = <FloatingActionButton>[
     FloatingActionButton(
       onPressed: null,
-      child: Icon(Icons.add),
+      child: Constants.role == Constants.adminRole ? Icon(Icons.add) : null,
     ),
     FloatingActionButton(
       onPressed: null,
@@ -44,13 +44,21 @@ class _HomeState extends State<Home> {
   ];
 
   @override
+  void initState() {
+    HelperFunctions.getUserNameSharedPreference().then((value) {
+      Constants.myName = value;
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: GestureDetector(
         child: _fabOptions.elementAt(_currentIndex),
         onTap: () {
-          if (_currentIndex == 0) {
+          if (_currentIndex == 0 && Constants.role == Constants.adminRole) {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => AddOffer()));
           } else if (_currentIndex == 1) {
@@ -69,6 +77,7 @@ class _HomeState extends State<Home> {
               AuthMethods().signOut();
               HelperFunctions.saveUserLoggedInSharedPreference(false);
               Constants.myName = null;
+              Constants.role = null;
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(

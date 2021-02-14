@@ -50,7 +50,7 @@ class DatabaseMethods {
   }
 
   getConversationMessages(String chatRoomId) async {
-    return await FirebaseFirestore.instance
+    return FirebaseFirestore.instance
         .collection("chatRoom")
         .doc(chatRoomId)
         .collection("chats")
@@ -59,7 +59,7 @@ class DatabaseMethods {
   }
 
   getChatRooms(String userName) async {
-    return await FirebaseFirestore.instance
+    return FirebaseFirestore.instance
         .collection("chatRoom")
         .where('users', arrayContains: userName)
         .snapshots();
@@ -84,7 +84,7 @@ class DatabaseMethods {
   }
 
   getOffers(int branch) async {
-    return await FirebaseFirestore.instance
+    return FirebaseFirestore.instance
         .collection("offers")
         .where('branches', arrayContains: branch)
         .snapshots();

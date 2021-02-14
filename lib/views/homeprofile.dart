@@ -11,26 +11,17 @@ class HomeProfile extends StatefulWidget {
 }
 
 class _HomeProfileState extends State<HomeProfile> {
-  String email;
-  String name;
-  String address;
-  String dob;
-  String phone;
-  double cgpa;
-  double twelfth;
-  double tenth;
-  int branch = 0;
   bool loading = true;
   DatabaseMethods databaseMethods = new DatabaseMethods();
   QuerySnapshot snap;
 
   @override
   initState() {
-    Future.delayed(Duration.zero).then((_) async {
-      QuerySnapshot temp = await databaseMethods
-          .getUserByUid(FirebaseAuth.instance.currentUser.uid);
+    databaseMethods
+        .getUserByUid(FirebaseAuth.instance.currentUser.uid)
+        .then((userSnap) {
       setState(() {
-        snap = temp;
+        snap = userSnap;
         loading = false;
       });
     });
@@ -259,7 +250,7 @@ class _HomeProfileState extends State<HomeProfile> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          '  10th',
+          '  10th Percentage',
           style: TextStyle(
             color: Colors.black54,
             fontWeight: FontWeight.bold,
@@ -273,7 +264,7 @@ class _HomeProfileState extends State<HomeProfile> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: Text(
-            tenth,
+            "$tenth %",
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -290,7 +281,7 @@ class _HomeProfileState extends State<HomeProfile> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          '  12th',
+          '  12th Percentage',
           style: TextStyle(
             color: Colors.black54,
             fontWeight: FontWeight.bold,
@@ -304,7 +295,7 @@ class _HomeProfileState extends State<HomeProfile> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: Text(
-            twelfth,
+            "$twelfth %",
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -316,7 +307,7 @@ class _HomeProfileState extends State<HomeProfile> {
     );
   }
 
-  Widget _buildDOB(String dob) {
+  Widget _buildDOB(DateTime dob) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -335,7 +326,7 @@ class _HomeProfileState extends State<HomeProfile> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: Text(
-            dob,
+            "${dob.day}-${dob.month}-${dob.year}",
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -428,7 +419,7 @@ class _HomeProfileState extends State<HomeProfile> {
                                     snap.docs[0].data()["tenth"].toString()),
                                 _buildtwelfth(
                                     snap.docs[0].data()["twelfth"].toString()),
-                                _buildDOB(snap.docs[0].data()["DOB"]),
+                                _buildDOB(snap.docs[0].data()["DOB"].toDate()),
                               ],
                             ))
                       ],

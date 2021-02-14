@@ -23,14 +23,14 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    Future.delayed(Duration.zero).then((_) async {
-      await getLoggedInState();
-    });
+    // Future.delayed(Duration.zero).then((_) async {
+    getLoggedInState();
+    // });
     super.initState();
   }
 
-  getLoggedInState() async {
-    await HelperFunctions.getUserLoggedInSharedPreference().then((value) {
+  getLoggedInState() {
+    HelperFunctions.getUserLoggedInSharedPreference().then((value) {
       setState(() {
         if (value != null) {
           userIsLoggedIn = value;

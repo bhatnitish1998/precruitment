@@ -38,7 +38,8 @@ class _SignUpState extends State<SignUp> {
 
       Map<String, String> userMapInfo = {
         "name": userNameTextEditingController.text,
-        "email": emailTextEditingController.text
+        "email": emailTextEditingController.text,
+        "role": Constants.studentRole
       };
 
       HelperFunctions.saveUserNameSharedPreference(

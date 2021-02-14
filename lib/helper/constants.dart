@@ -9,4 +9,7 @@ class Constants {
     5: "School of Electronics & Communication",
     6: "School of Mechanical Engineering",
   };
+  static String adminRole = "admin";
+  static String studentRole = "student";
+  static String role;
 }

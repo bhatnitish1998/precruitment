@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:precruitment/helper/constants.dart';
-import 'package:precruitment/helper/helperfunctions.dart';
 import 'package:precruitment/services/auth.dart';
 import 'package:precruitment/services/database.dart';
 import 'package:precruitment/views/conversation_screen.dart';
@@ -47,8 +46,7 @@ class _ChatRoomState extends State<ChatRoom> {
     super.initState();
   }
 
-  getUserInfo() async {
-    Constants.myName = await HelperFunctions.getUserNameSharedPreference();
+  getUserInfo() {
     databaseMethods.getChatRooms(Constants.myName).then((value) {
       setState(() {
         chatRoomsStream = value;

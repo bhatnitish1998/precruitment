@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:precruitment/helper/constants.dart';
 import 'package:precruitment/helper/helperfunctions.dart';
 import 'package:precruitment/services/auth.dart';
 import 'package:precruitment/services/database.dart';
@@ -46,6 +47,8 @@ class _SignInState extends State<SignIn> {
         snapshotUserInfo = val;
         HelperFunctions.saveUserNameSharedPreference(
             snapshotUserInfo.docs[0].data()["name"]);
+        Constants.myName = snapshotUserInfo.docs[0].data()["name"];
+        Constants.role = snapshotUserInfo.docs[0].data()["role"];
       });
 
       setState(() {

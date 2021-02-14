@@ -16,7 +16,7 @@ class _ProfileState extends State<Profile> {
   String email;
   String name;
   String address;
-  String dob;
+  DateTime dob = DateTime.now();
   String phone;
   double cgpa;
   double twelfth;
@@ -31,9 +31,22 @@ class _ProfileState extends State<Profile> {
   TextEditingController _userCGPAController = TextEditingController();
   TextEditingController _userTenthController = TextEditingController();
   TextEditingController _userTwelfthController = TextEditingController();
-  TextEditingController _userDOBController = TextEditingController();
+  // TextEditingController _userDOBController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  selectDOB(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: dob,
+      firstDate: DateTime(1970),
+      lastDate: DateTime(2050),
+    );
+    if (picked != null && picked != dob)
+      setState(() {
+        dob = picked;
+      });
+  }
 
   Widget _buildName() {
     return Column(
@@ -304,7 +317,7 @@ class _ProfileState extends State<Profile> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          '  10\u1d57\u02b0 Percentage',
+          '  10th Percentage',
           style: TextStyle(
             color: Colors.black54,
             fontWeight: FontWeight.bold,
@@ -329,7 +342,7 @@ class _ProfileState extends State<Profile> {
                 Icons.grade,
                 color: Colors.white,
               ),
-              hintText: 'Enter Your SSLC%',
+              hintText: 'Enter Your SSLC %',
               hintStyle: kHintTextStyle,
             ),
             controller: _userTenthController,
@@ -357,7 +370,7 @@ class _ProfileState extends State<Profile> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          '  12\u1d57\u02b0 Percentage',
+          '  12th Percentage',
           style: TextStyle(
             color: Colors.black54,
             fontWeight: FontWeight.bold,
@@ -382,7 +395,7 @@ class _ProfileState extends State<Profile> {
                 Icons.grade,
                 color: Colors.white,
               ),
-              hintText: 'Enter your PUC%',
+              hintText: 'Enter your PUC %',
               hintStyle: kHintTextStyle,
             ),
             controller: _userTwelfthController,
@@ -420,42 +433,15 @@ class _ProfileState extends State<Profile> {
         SizedBox(height: 10),
         Container(
           alignment: Alignment.centerLeft,
-          decoration: kBoxDecorationStyle,
+          // decoration: kBoxDecorationStyle,
           height: 60.0,
-          child: TextFormField(
-            keyboardType: TextInputType.datetime,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
+          child: Center(
+            child: RaisedButton(
+              onPressed: () => selectDOB(context),
+              child: Text("Click to select DOB"),
             ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(
-                Icons.calendar_today,
-                color: Colors.white,
-              ),
-              hintText: 'DD-MM-YYYY',
-              hintStyle: kHintTextStyle,
-            ),
-            controller: _userDOBController,
-            validator: (String value) {
-              if (value.isEmpty) {
-                return "DOB is required";
-              }
-              if (!RegExp(
-                      r"^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$")
-                  .hasMatch(value)) {
-                return "Invalid DOB";
-              }
-              return null;
-            },
-            onSaved: (String value) {
-              dob = value;
-            },
           ),
         ),
-        SizedBox(height: 20),
       ],
     );
   }
@@ -474,7 +460,7 @@ class _ProfileState extends State<Profile> {
       'cgpa': double.parse(_userCGPAController.text),
       'twelfth': double.parse(_userTwelfthController.text),
       'tenth': double.parse(_userTenthController.text),
-      'DOB': _userDOBController.text,
+      'DOB': dob,
       'branch': applyBranch()
     };
 
