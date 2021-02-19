@@ -111,46 +111,122 @@ class _AddOfferState extends State<AddOffer> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(
+                      height: 16.0,
+                    ),
                     TextFormField(
-                      // TODO,
                       controller: companyTextEditingController,
                       decoration: InputDecoration(
-                        hintText: "Company Name",
+                        hintText: 'Company Name',
+                        filled: true,
+                        fillColor: Color(0xFFDBEDFF),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
                       ),
-                      // validator:
+                    ),
+                    SizedBox(
+                      height: 16.0,
                     ),
                     TextFormField(
                       controller: roleTextEditingController,
                       decoration: InputDecoration(
-                        hintText: "Role",
+                        hintText: 'Role',
+                        filled: true,
+                        fillColor: Color(0xFFDBEDFF),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 16.0,
                     ),
                     TextFormField(
                       controller: cgpaTextEditingController,
                       decoration: InputDecoration(
-                        hintText: "CGPA",
+                        hintText: 'Min. CGPA',
+                        filled: true,
+                        fillColor: Color(0xFFDBEDFF),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 16.0,
                     ),
                     TextFormField(
                       controller: tenthTextEditingController,
                       decoration: InputDecoration(
-                        hintText: "10th",
+                        hintText: 'Min. 10th Score',
+                        filled: true,
+                        fillColor: Color(0xFFDBEDFF),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 16.0,
                     ),
                     TextFormField(
                       controller: twelfthTextEditingController,
                       decoration: InputDecoration(
-                        hintText: "12th",
+                        hintText: 'Min. 12th Score',
+                        filled: true,
+                        fillColor: Color(0xFFDBEDFF),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 16.0,
                     ),
                     TextFormField(
                       controller: lpaTextEditingController,
                       decoration: InputDecoration(
-                        hintText: "Salary",
+                        hintText: 'Salary',
+                        filled: true,
+                        fillColor: Color(0xFFDBEDFF),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
                       ),
                     ),
                     SizedBox(
-                      height: 25.0,
+                      height: 16.0,
                     ),
                     Row(
                       children: [
@@ -163,6 +239,9 @@ class _AddOfferState extends State<AddOffer> {
                             "${deadline.day.toString()} / ${deadline.month.toString()}"),
                       ],
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    ),
+                    SizedBox(
+                      height: 8.0,
                     ),
                     Row(
                       children: [
@@ -177,10 +256,25 @@ class _AddOfferState extends State<AddOffer> {
                       ],
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                     ),
+                    SizedBox(
+                      height: 16.0,
+                    ),
                     TextFormField(
+                      minLines: 10,
+                      maxLines: 15,
                       controller: descriptionTextEditingController,
                       decoration: InputDecoration(
-                        hintText: "Description",
+                        hintText: 'Description',
+                        filled: true,
+                        fillColor: Color(0xFFDBEDFF),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
                       ),
                     ),
                     SizedBox(height: 10.0),

@@ -105,7 +105,9 @@ class _HomeState extends State<Home> {
                   child: Column(
                     children: [
                       Icon(
-                        Icons.article_outlined,
+                        _currentIndex == 0
+                            ? Icons.article
+                            : Icons.article_outlined,
                         color: _currentIndex == 0 ? Colors.blue : null,
                       ),
                       Text(
@@ -128,7 +130,7 @@ class _HomeState extends State<Home> {
                   child: Column(
                     children: [
                       Icon(
-                        Icons.forum_outlined,
+                        _currentIndex == 1 ? Icons.forum : Icons.forum_outlined,
                         color: _currentIndex == 1 ? Colors.blue : null,
                       ),
                       Text(
@@ -151,7 +153,9 @@ class _HomeState extends State<Home> {
                   child: Column(
                     children: [
                       Icon(
-                        Icons.person_outline,
+                        _currentIndex == 2
+                            ? Icons.person
+                            : Icons.person_outlined,
                         color: _currentIndex == 2 ? Colors.blue : null,
                       ),
                       Text(
@@ -174,7 +178,9 @@ class _HomeState extends State<Home> {
                   child: Column(
                     children: [
                       Icon(
-                        Icons.emoji_events_outlined,
+                        _currentIndex == 3
+                            ? Icons.emoji_events
+                            : Icons.emoji_events_outlined,
                         color: _currentIndex == 3 ? Colors.blue : null,
                       ),
                       Text(
