@@ -48,6 +48,9 @@ class _HomeState extends State<Home> {
     HelperFunctions.getUserNameSharedPreference().then((value) {
       Constants.myName = value;
     });
+    HelperFunctions.getUserRoleSharedPreference().then((value) {
+      Constants.role = value;
+    });
     super.initState();
   }
 
@@ -55,7 +58,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: GestureDetector(
+      floatingActionButton: InkWell(
         child: _fabOptions.elementAt(_currentIndex),
         onTap: () {
           if (_currentIndex == 0 && Constants.role == Constants.adminRole) {
@@ -72,12 +75,13 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text("Precruitment"),
         actions: [
-          GestureDetector(
+          InkWell(
             onTap: () {
               AuthMethods().signOut();
               HelperFunctions.saveUserLoggedInSharedPreference(false);
               Constants.myName = null;
               Constants.role = null;
+              HelperFunctions.saveUserRoleSharedPreference("USERROLEKEY");
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -99,7 +103,8 @@ class _HomeState extends State<Home> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              GestureDetector(
+              InkWell(
+                customBorder: CircleBorder(),
                 child: Container(
                   height: 40.0,
                   child: Column(
@@ -124,7 +129,8 @@ class _HomeState extends State<Home> {
                   });
                 },
               ),
-              GestureDetector(
+              InkWell(
+                customBorder: CircleBorder(),
                 child: Container(
                   height: 40.0,
                   child: Column(
@@ -147,7 +153,8 @@ class _HomeState extends State<Home> {
                   });
                 },
               ),
-              GestureDetector(
+              InkWell(
+                customBorder: CircleBorder(),
                 child: Container(
                   height: 40.0,
                   child: Column(
@@ -172,7 +179,8 @@ class _HomeState extends State<Home> {
                   });
                 },
               ),
-              GestureDetector(
+              InkWell(
+                customBorder: CircleBorder(),
                 child: Container(
                   height: 40.0,
                   child: Column(

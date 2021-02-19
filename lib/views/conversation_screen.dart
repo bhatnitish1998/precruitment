@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:precruitment/helper/constants.dart';
 import 'package:precruitment/services/database.dart';
@@ -64,6 +65,10 @@ class _ConversationScreenState extends State<ConversationScreen> {
         body: Container(
           child: Stack(
             children: [
+              // Container(
+              // child: Constants.role == Constants.adminRole
+              // ? Text("HI")
+              // : null),
               chatMessageList(),
               Container(
                 alignment: Alignment.bottomCenter,
@@ -109,40 +114,43 @@ class MessageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(
-          top: 8,
-          bottom: 8,
-          left: isSentByMe ? 0 : 24,
-          right: isSentByMe ? 24 : 0),
-      // margin: EdgeInsets.symmetric(vertical: 8),
-      // width: MediaQuery.of(context).size.width,
-      alignment: isSentByMe ? Alignment.centerRight : Alignment.centerLeft,
+    return InkWell(
+      onTap: () {},
       child: Container(
-          margin: isSentByMe
-              ? EdgeInsets.only(left: 30)
-              : EdgeInsets.only(right: 30),
-          padding: EdgeInsets.only(top: 17, bottom: 17, left: 20, right: 20),
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: isSentByMe
-                      ? [const Color(0xff007EF4), const Color(0xff2A75BC)]
-                      : [const Color(0x9c2A75BC), const Color(0x9c2A75BC)]),
-              borderRadius: isSentByMe
-                  ? BorderRadius.only(
-                      topLeft: Radius.circular(23),
-                      topRight: Radius.circular(23),
-                      bottomLeft: Radius.circular(23),
-                    )
-                  : BorderRadius.only(
-                      topLeft: Radius.circular(23),
-                      topRight: Radius.circular(23),
-                      bottomRight: Radius.circular(23),
-                    )),
-          child: Text(
-            message,
-            style: TextStyle(color: Colors.white, fontSize: 17),
-          )),
+        padding: EdgeInsets.only(
+            top: 8,
+            bottom: 8,
+            left: isSentByMe ? 0 : 24,
+            right: isSentByMe ? 24 : 0),
+        // margin: EdgeInsets.symmetric(vertical: 8),
+        // width: MediaQuery.of(context).size.width,
+        alignment: isSentByMe ? Alignment.centerRight : Alignment.centerLeft,
+        child: Container(
+            margin: isSentByMe
+                ? EdgeInsets.only(left: 30)
+                : EdgeInsets.only(right: 30),
+            padding: EdgeInsets.only(top: 17, bottom: 17, left: 20, right: 20),
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: isSentByMe
+                        ? [const Color(0xff007EF4), const Color(0xff2A75BC)]
+                        : [const Color(0x9c2A75BC), const Color(0x9c2A75BC)]),
+                borderRadius: isSentByMe
+                    ? BorderRadius.only(
+                        topLeft: Radius.circular(23),
+                        topRight: Radius.circular(23),
+                        bottomLeft: Radius.circular(23),
+                      )
+                    : BorderRadius.only(
+                        topLeft: Radius.circular(23),
+                        topRight: Radius.circular(23),
+                        bottomRight: Radius.circular(23),
+                      )),
+            child: Text(
+              message,
+              style: TextStyle(color: Colors.white, fontSize: 17),
+            )),
+      ),
     );
   }
 }

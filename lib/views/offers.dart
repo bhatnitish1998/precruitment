@@ -36,6 +36,7 @@ class OfferTile extends StatelessWidget {
       child: Stack(
         children: [
           InkWell(
+            borderRadius: BorderRadius.circular(16),
             onTap: () {
               Navigator.push(
                 context,

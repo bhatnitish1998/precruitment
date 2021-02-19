@@ -47,6 +47,8 @@ class _SignInState extends State<SignIn> {
         snapshotUserInfo = val;
         HelperFunctions.saveUserNameSharedPreference(
             snapshotUserInfo.docs[0].data()["name"]);
+        HelperFunctions.saveUserRoleSharedPreference(
+            snapshotUserInfo.docs[0].data()["role"]);
         Constants.myName = snapshotUserInfo.docs[0].data()["name"];
         Constants.role = snapshotUserInfo.docs[0].data()["role"];
       });
