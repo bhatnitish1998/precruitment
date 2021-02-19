@@ -33,7 +33,7 @@ class _SignInState extends State<SignIn> {
 
   QuerySnapshot snapshotUserInfo;
 
-  signIn() {
+  signIn(BuildContext context) {
     if (formkey.currentState.validate()) {
       Dialogs.showLoadingDialog(context, loadkey); //here
       emailTextEditingController.text =
@@ -58,30 +58,82 @@ class _SignInState extends State<SignIn> {
       authMethods
           .signInWithEmailAndPassword(emailTextEditingController.text,
               passwordTextEditingController.text)
-          .then((value) {
-        if (value != null) {
-          if (FirebaseAuth.instance.currentUser.emailVerified == false) {
-            Navigator.of(loadkey.currentContext, rootNavigator: true)
-                .pop(); //here
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Verify(),
-              ),
-            );
-          } else {
-            Navigator.of(loadkey.currentContext, rootNavigator: true)
-                .pop(); //here
-            HelperFunctions.saveUserLoggedInSharedPreference(true);
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Home(),
-              ),
-            );
+          .then(
+        (value) {
+          if (value != null) {
+            if (value == 'user-not-found') {
+              Navigator.of(loadkey.currentContext, rootNavigator: true).pop();
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Icon(
+                          Icons.error,
+                          size: 36.0,
+                        ),
+                        Text(
+                          "User does not exist.",
+                          style: TextStyle(
+                              color: Colors.red[400],
+                              fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              );
+            } else if (value == 'wrong-password') {
+              Navigator.of(loadkey.currentContext, rootNavigator: true).pop();
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Icon(
+                          Icons.error,
+                          size: 36.0,
+                        ),
+                        Text(
+                          "Wrong Password.",
+                          style: TextStyle(
+                              color: Colors.red[400],
+                              fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              );
+            } else {
+              if (FirebaseAuth.instance.currentUser.emailVerified == false) {
+                Navigator.of(loadkey.currentContext, rootNavigator: true)
+                    .pop(); //here
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Verify(),
+                  ),
+                );
+              } else {
+                Navigator.of(loadkey.currentContext, rootNavigator: true)
+                    .pop(); //here
+                HelperFunctions.saveUserLoggedInSharedPreference(true);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Home(),
+                  ),
+                );
+              }
+            }
           }
-        }
-      });
+        },
+      );
     }
   }
 
@@ -141,7 +193,7 @@ class _SignInState extends State<SignIn> {
                       SizedBox(height: 8),
                       GestureDetector(
                         onTap: () {
-                          signIn();
+                          signIn(context);
                         },
                         child: RaisedButton(
                           child: Text(

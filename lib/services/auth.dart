@@ -10,7 +10,7 @@ class AuthMethods {
       User user = credential.user;
       return user.uid;
     } catch (e) {
-      print(e.toString());
+      return e.code;
     }
   }
 
