@@ -157,6 +157,22 @@ class _SignInState extends State<SignIn> {
                   child: Column(
                     children: [
                       TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'email',
+                          filled: true,
+                          fillColor: Color(0xFFDBEDFF),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).accentColor),
+                          ),
+                        ),
                         validator: (val) {
                           return RegExp(
                                       r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
@@ -165,11 +181,27 @@ class _SignInState extends State<SignIn> {
                               : "Bad Email";
                         },
                         controller: emailTextEditingController,
-                        decoration: InputDecoration(
-                          hintText: "email",
-                        ),
+                      ),
+                      SizedBox(
+                        height: 12,
                       ),
                       TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'Password',
+                          filled: true,
+                          fillColor: Color(0xFFDBEDFF),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).accentColor),
+                          ),
+                        ),
                         obscureText: true,
                         validator: (val) {
                           return val.trim().length < 6
@@ -177,9 +209,6 @@ class _SignInState extends State<SignIn> {
                               : null;
                         },
                         controller: passwordTextEditingController,
-                        decoration: InputDecoration(
-                          hintText: "password",
-                        ),
                       ),
                       SizedBox(
                         height: 8,
@@ -193,18 +222,22 @@ class _SignInState extends State<SignIn> {
                       //   ),
                       // ),
                       SizedBox(height: 8),
-                      GestureDetector(
-                        onTap: () {
+                      // GestureDetector(
+                      // onTap: () {
+                      // signIn(context);
+                      // },
+                      // child:
+                      RaisedButton(
+                        color: Theme.of(context).primaryColor,
+                        child: Text(
+                          "Login",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
                           signIn(context);
                         },
-                        child: RaisedButton(
-                          child: Text(
-                            "Login",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          onPressed: null,
-                        ),
                       ),
+                      // ),
                       SizedBox(height: 8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

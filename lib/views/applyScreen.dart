@@ -123,8 +123,10 @@ class _ApplyScreenState extends State<ApplyScreen> {
                   applyMe().then(
                     (value) {
                       if (value) {
-                        final snackbar =
-                            SnackBar(content: Text("Applied Successfully!"));
+                        final snackbar = SnackBar(
+                          content: Text("Applied Successfully!"),
+                          backgroundColor: Theme.of(context).primaryColor,
+                        );
                         Scaffold.of(context).showSnackBar(snackbar);
                       } else {
                         final snackbar = SnackBar(
@@ -135,7 +137,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                   );
                 }
               : null,
-          color: Color.fromRGBO(58, 66, 86, 1.0),
+          color: Theme.of(context).accentColor,
           child: Text("APPLY", style: TextStyle(color: Colors.white)),
         ),
       ),
@@ -146,11 +148,11 @@ class _ApplyScreenState extends State<ApplyScreen> {
       child: Builder(
         builder: (context) => RaisedButton(
           onPressed: () async {
-            await createExcel("Generic Co.", widget.role);
+            await createExcel(widget.company, widget.role);
             final snackbar = SnackBar(content: Text("Excel Sheet Downloaded "));
             Scaffold.of(context).showSnackBar(snackbar);
           },
-          color: Colors.blue,
+          color: Theme.of(context).accentColor,
           child: Text("Generate Excel Sheet",
               style: TextStyle(color: Colors.white)),
         ),

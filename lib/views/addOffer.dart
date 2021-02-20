@@ -102,6 +102,7 @@ class _AddOfferState extends State<AddOffer> {
       appBar: appBarMain(context),
       body: SingleChildScrollView(
         child: Container(
+          padding: EdgeInsets.all(10.0),
           alignment: Alignment.bottomCenter,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 24),
@@ -126,7 +127,8 @@ class _AddOfferState extends State<AddOffer> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.grey),
+                          borderSide:
+                              BorderSide(color: Theme.of(context).accentColor),
                         ),
                       ),
                     ),
@@ -145,7 +147,8 @@ class _AddOfferState extends State<AddOffer> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.grey),
+                          borderSide:
+                              BorderSide(color: Theme.of(context).accentColor),
                         ),
                       ),
                     ),
@@ -164,7 +167,8 @@ class _AddOfferState extends State<AddOffer> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.grey),
+                          borderSide:
+                              BorderSide(color: Theme.of(context).accentColor),
                         ),
                       ),
                     ),
@@ -183,7 +187,8 @@ class _AddOfferState extends State<AddOffer> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.grey),
+                          borderSide:
+                              BorderSide(color: Theme.of(context).accentColor),
                         ),
                       ),
                     ),
@@ -202,7 +207,8 @@ class _AddOfferState extends State<AddOffer> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.grey),
+                          borderSide:
+                              BorderSide(color: Theme.of(context).accentColor),
                         ),
                       ),
                     ),
@@ -221,7 +227,8 @@ class _AddOfferState extends State<AddOffer> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.grey),
+                          borderSide:
+                              BorderSide(color: Theme.of(context).accentColor),
                         ),
                       ),
                     ),
@@ -231,8 +238,12 @@ class _AddOfferState extends State<AddOffer> {
                     Row(
                       children: [
                         RaisedButton(
+                          color: Theme.of(context).primaryColor,
                           onPressed: () => selectDeadlineDate(context),
-                          child: Text("Select Last Date of Application"),
+                          child: Text(
+                            "Select Last Date of Application",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                         // Padding(padding: EdgeInsets.only(left: 20.0)),
                         Text(
@@ -246,10 +257,14 @@ class _AddOfferState extends State<AddOffer> {
                     Row(
                       children: [
                         RaisedButton(
+                          color: Theme.of(context).primaryColor,
                           onPressed: () {
                             selectTestDate(context);
                           },
-                          child: Text("Select Test Date"),
+                          child: Text(
+                            "Select Test Date",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                         Text(
                             "${testDate.day.toString()} / ${testDate.month.toString()}"),
@@ -272,9 +287,10 @@ class _AddOfferState extends State<AddOffer> {
                           borderSide: BorderSide(color: Colors.grey),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.grey),
-                        ),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).accentColor)),
                       ),
                     ),
                     SizedBox(height: 10.0),
@@ -380,16 +396,13 @@ class _AddOfferState extends State<AddOffer> {
                     SizedBox(height: 16),
                     Container(
                       alignment: Alignment.center,
-                      child: GestureDetector(
-                        onTap: () {
-                          addOffer();
-                        },
-                        child: RaisedButton(
-                          child: Text(
-                            "Add Offer",
-                          ),
-                          onPressed: null,
+                      child: RaisedButton(
+                        color: Theme.of(context).primaryColor,
+                        child: Text(
+                          "Add Offer",
+                          style: TextStyle(color: Colors.white),
                         ),
+                        onPressed: () => addOffer(),
                       ),
                     ),
                   ],

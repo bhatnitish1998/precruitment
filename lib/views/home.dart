@@ -25,24 +25,6 @@ class _HomeState extends State<Home> {
     AluminiScreen(),
   ];
 
-  List<FloatingActionButton> _fabOptions = <FloatingActionButton>[
-    FloatingActionButton(
-      onPressed: null,
-      child: Constants.role == Constants.adminRole ? Icon(Icons.add) : null,
-    ),
-    FloatingActionButton(
-      onPressed: null,
-      child: Icon(Icons.search),
-    ),
-    FloatingActionButton(
-      onPressed: null,
-    ),
-    FloatingActionButton(
-      onPressed: null,
-      child: Icon(Icons.add),
-    ),
-  ];
-
   @override
   void initState() {
     HelperFunctions.getUserNameSharedPreference().then((value) {
@@ -56,6 +38,24 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    List<FloatingActionButton> _fabOptions = <FloatingActionButton>[
+      FloatingActionButton(
+        onPressed: null,
+        child: (Constants.role == Constants.adminRole) ? Icon(Icons.add) : null,
+      ),
+      FloatingActionButton(
+        onPressed: null,
+        child: Icon(Icons.search),
+      ),
+      FloatingActionButton(
+        onPressed: null,
+      ),
+      FloatingActionButton(
+        onPressed: null,
+        child: Icon(Icons.add),
+      ),
+    ];
+
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: InkWell(
@@ -101,109 +101,155 @@ class _HomeState extends State<Home> {
           padding: const EdgeInsets.all(16.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              InkWell(
-                customBorder: CircleBorder(),
-                child: Container(
-                  height: 40.0,
-                  child: Column(
-                    children: [
-                      Icon(
-                        _currentIndex == 0
-                            ? Icons.article
-                            : Icons.article_outlined,
-                        color: _currentIndex == 0 ? Colors.blue : null,
-                      ),
-                      Text(
-                        "Offers",
-                        style: TextStyle(
-                            color: _currentIndex == 0 ? Colors.blue : null),
-                      ),
-                    ],
+              Expanded(
+                child: SizedBox(
+                  height: 40,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          _currentIndex == 0
+                              ? Icons.article
+                              : Icons.article_outlined,
+                          color: _currentIndex == 0
+                              ? Theme.of(context).primaryColor
+                              : null,
+                        ),
+                        Text(
+                          "Offers",
+                          style: TextStyle(
+                            color: _currentIndex == 0
+                                ? Theme.of(context).primaryColor
+                                : null,
+                            fontWeight:
+                                _currentIndex == 0 ? FontWeight.w600 : null,
+                          ),
+                        ),
+                      ],
+                    ),
+                    onTap: () {
+                      setState(() {
+                        _currentIndex = 0;
+                      });
+                    },
                   ),
                 ),
-                onTap: () {
-                  setState(() {
-                    _currentIndex = 0;
-                  });
-                },
               ),
-              InkWell(
-                customBorder: CircleBorder(),
-                child: Container(
-                  height: 40.0,
-                  child: Column(
-                    children: [
-                      Icon(
-                        _currentIndex == 1 ? Icons.forum : Icons.forum_outlined,
-                        color: _currentIndex == 1 ? Colors.blue : null,
-                      ),
-                      Text(
-                        "Chat",
-                        style: TextStyle(
-                            color: _currentIndex == 1 ? Colors.blue : null),
-                      ),
-                    ],
+              Expanded(
+                child: SizedBox(
+                  height: 40,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          _currentIndex == 1
+                              ? Icons.forum
+                              : Icons.forum_outlined,
+                          color: _currentIndex == 1
+                              ? Theme.of(context).primaryColor
+                              : null,
+                        ),
+                        Text(
+                          "Chat",
+                          style: TextStyle(
+                            color: _currentIndex == 1
+                                ? Theme.of(context).primaryColor
+                                : null,
+                            fontWeight:
+                                _currentIndex == 1 ? FontWeight.w600 : null,
+                          ),
+                        ),
+                      ],
+                    ),
+                    onTap: () {
+                      setState(() {
+                        _currentIndex = 1;
+                      });
+                    },
                   ),
                 ),
-                onTap: () {
-                  setState(() {
-                    _currentIndex = 1;
-                  });
-                },
               ),
-              InkWell(
-                customBorder: CircleBorder(),
-                child: Container(
-                  height: 40.0,
-                  child: Column(
-                    children: [
-                      Icon(
-                        _currentIndex == 2
-                            ? Icons.person
-                            : Icons.person_outlined,
-                        color: _currentIndex == 2 ? Colors.blue : null,
-                      ),
-                      Text(
-                        "Profile",
-                        style: TextStyle(
-                            color: _currentIndex == 2 ? Colors.blue : null),
-                      ),
-                    ],
+              Expanded(
+                child: SizedBox(
+                  height: 40,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          _currentIndex == 2
+                              ? Icons.person
+                              : Icons.person_outlined,
+                          color: _currentIndex == 2
+                              ? Theme.of(context).primaryColor
+                              : null,
+                        ),
+                        Text(
+                          "Profile",
+                          style: TextStyle(
+                            color: _currentIndex == 2
+                                ? Theme.of(context).primaryColor
+                                : null,
+                            fontWeight:
+                                _currentIndex == 2 ? FontWeight.w600 : null,
+                          ),
+                        ),
+                      ],
+                    ),
+                    onTap: () {
+                      setState(() {
+                        _currentIndex = 2;
+                      });
+                    },
                   ),
                 ),
-                onTap: () {
-                  setState(() {
-                    _currentIndex = 2;
-                  });
-                },
               ),
-              InkWell(
-                customBorder: CircleBorder(),
-                child: Container(
-                  height: 40.0,
-                  child: Column(
-                    children: [
-                      Icon(
-                        _currentIndex == 3
-                            ? Icons.emoji_events
-                            : Icons.emoji_events_outlined,
-                        color: _currentIndex == 3 ? Colors.blue : null,
-                      ),
-                      Text(
-                        "Inspiration",
-                        style: TextStyle(
-                            color: _currentIndex == 3 ? Colors.blue : null),
-                      ),
-                    ],
+              Expanded(
+                child: SizedBox(
+                  height: 40,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          _currentIndex == 3
+                              ? Icons.emoji_events
+                              : Icons.emoji_events_outlined,
+                          color: _currentIndex == 3
+                              ? Theme.of(context).primaryColor
+                              : null,
+                        ),
+                        Text(
+                          "Inspiration",
+                          style: TextStyle(
+                            color: _currentIndex == 3
+                                ? Theme.of(context).primaryColor
+                                : null,
+                            fontWeight:
+                                _currentIndex == 3 ? FontWeight.w600 : null,
+                          ),
+                        ),
+                      ],
+                    ),
+                    onTap: () {
+                      setState(() {
+                        _currentIndex = 3;
+                      });
+                    },
                   ),
                 ),
-                onTap: () {
-                  setState(() {
-                    _currentIndex = 3;
-                  });
-                },
               ),
             ],
           ),

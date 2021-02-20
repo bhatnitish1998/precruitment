@@ -424,18 +424,18 @@ class _HomeProfileState extends State<HomeProfile> {
                             ))
                       ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 210, left: 170),
-                      child: CircleAvatar(
-                        backgroundColor: Colors.black54,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.edit,
-                          ),
-                          onPressed: () {},
-                        ),
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.only(top: 210, left: 170),
+                    //   child: CircleAvatar(
+                    //     backgroundColor: Colors.black54,
+                    //     child: IconButton(
+                    //       icon: Icon(
+                    //         Icons.edit,
+                    //       ),
+                    //       onPressed: () {},
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -447,7 +447,7 @@ class _HomeProfileState extends State<HomeProfile> {
 class HeaderCurvedContainer extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()..color = const Color(0xFF6CA8F1);
+    Paint paint = Paint()..color = const Color(0xFF735290);
     Path path = Path()
       ..relativeLineTo(0, 150)
       ..quadraticBezierTo(size.width / 2, 250.0, size.width, 150)

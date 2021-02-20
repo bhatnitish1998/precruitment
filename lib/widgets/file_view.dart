@@ -11,10 +11,16 @@ class FileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(Icons.picture_as_pdf),
+      leading: Icon(
+        Icons.picture_as_pdf,
+        color: Theme.of(context).accentColor,
+      ),
       title: Text(name),
       trailing: IconButton(
-        icon: Icon(Icons.file_download),
+        icon: Icon(
+          Icons.file_download,
+          color: Theme.of(context).accentColor,
+        ),
         onPressed: () async {
           final status = await Permission.storage.request().isGranted;
           print(status);

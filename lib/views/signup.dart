@@ -94,6 +94,22 @@ class _SignUpState extends State<SignUp> {
                         child: Column(
                           children: [
                             TextFormField(
+                              decoration: InputDecoration(
+                                hintText: 'username',
+                                filled: true,
+                                fillColor: Color(0xFFDBEDFF),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context).accentColor),
+                                ),
+                              ),
                               validator: (val) {
                                 return val.trim().isEmpty ||
                                         val.trim().length < 4
@@ -101,11 +117,27 @@ class _SignUpState extends State<SignUp> {
                                     : null;
                               },
                               controller: userNameTextEditingController,
-                              decoration: InputDecoration(
-                                hintText: "username",
-                              ),
+                            ),
+                            SizedBox(
+                              height: 12,
                             ),
                             TextFormField(
+                              decoration: InputDecoration(
+                                hintText: 'Email',
+                                filled: true,
+                                fillColor: Color(0xFFDBEDFF),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context).accentColor),
+                                ),
+                              ),
                               validator: (val) {
                                 return RegExp(
                                             r"^01(fe|FE)\d\d(b|B)[a-zA-Z][a-zA-Z]\d\d\d@(kletech.ac.in|KLETECH.AC.IN)$")
@@ -114,11 +146,27 @@ class _SignUpState extends State<SignUp> {
                                     : "Please enter a valid KLE Tech Email ID";
                               },
                               controller: emailTextEditingController,
-                              decoration: InputDecoration(
-                                hintText: "Email",
-                              ),
+                            ),
+                            SizedBox(
+                              height: 12,
                             ),
                             TextFormField(
+                              decoration: InputDecoration(
+                                hintText: 'Password',
+                                filled: true,
+                                fillColor: Color(0xFFDBEDFF),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context).accentColor),
+                                ),
+                              ),
                               obscureText: true,
                               validator: (val) {
                                 return val.length < 6
@@ -126,15 +174,12 @@ class _SignUpState extends State<SignUp> {
                                     : null;
                               },
                               controller: passwordTextEditingController,
-                              decoration: InputDecoration(
-                                hintText: "Password",
-                              ),
                             ),
                           ],
                         ),
                       ),
                       SizedBox(
-                        height: 8,
+                        height: 12,
                       ),
                       // Container(
                       //   alignment: Alignment.centerRight,
@@ -145,18 +190,17 @@ class _SignUpState extends State<SignUp> {
                       //   ),
                       // ),//TODO
                       SizedBox(height: 8),
-                      GestureDetector(
-                        onTap: () {
+                      RaisedButton(
+                        color: Theme.of(context).primaryColor,
+                        child: Text(
+                          "Signup",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
                           signMeUp();
                         },
-                        child: RaisedButton(
-                          child: Text(
-                            "Signup",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          onPressed: null,
-                        ),
                       ),
+
                       SizedBox(height: 8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

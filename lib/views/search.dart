@@ -75,11 +75,14 @@ class _SearchScreenState extends State<SearchScreen> {
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Theme.of(context).accentColor,
                   borderRadius: BorderRadius.circular(13),
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                child: Text("Message"),
+                child: Text(
+                  "Message",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -100,7 +103,7 @@ class _SearchScreenState extends State<SearchScreen> {
           children: [
             Container(
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-              color: Color(0x54FFFFFF),
+              color: Color(0xFFEEEEEE),
               child: Row(
                 children: [
                   Expanded(
@@ -131,7 +134,7 @@ class _SearchScreenState extends State<SearchScreen> {
               // margin: new EdgeInsets.symmetric(vertical: 2.0),
               height: 2.0,
               width: MediaQuery.of(context).size.width,
-              color: new Color(0xff00c6ff),
+              color: Theme.of(context).accentColor,
             ),
             searchList()
           ],
